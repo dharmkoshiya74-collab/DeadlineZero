@@ -73,3 +73,7 @@ backups/
 # Temporary audit and snapshot files
 *.txt
 deadlinezero-stage1-*/
+
+# Temporary audit and snapshot files
+*.txt
+deadlinezero-stage1-*/

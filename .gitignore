@@ -39,3 +39,33 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+.env.local
+# Local environment secrets
+.env.*.local
+.env.production
+!.env.example
+# Build and dependency output
+node_modules/
+dist/
+.vercel/
+# Local logs and temporary files
+*.log
+typescript-errors.txt
+*.bak
+*.backup
+README-before-submission-backup.md
+# Local backup directories
+backup/
+backups/
+.backup/
+
+# Development backups - keep out of GitHub
+**/*backup*
+**/*before-*
+**/*pre-*
+
+# Development backups - keep out of GitHub
+**/*backup*
+**/*before-*
+**/*pre-*

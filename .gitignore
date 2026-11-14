@@ -69,3 +69,7 @@ backups/
 **/*backup*
 **/*before-*
 **/*pre-*
+
+# Temporary audit and snapshot files
+*.txt
+deadlinezero-stage1-*/

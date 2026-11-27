@@ -1,18 +1,16 @@
-﻿<svg xmlns="http://www.w3.org/2000/svg" width="640" height="180" viewBox="0 0 640 180" fill="none">
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="760" height="180" viewBox="0 0 760 180">
   <defs>
     <linearGradient id="brand" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%" stop-color="#8B5CF6"/>
       <stop offset="100%" stop-color="#5B21B6"/>
     </linearGradient>
   </defs>
-  <rect x="8" y="8" width="164" height="164" rx="42" fill="#F5F0FF"/>
-  <rect x="39" y="39" width="102" height="102" rx="19" fill="url(#brand)"/>
-  <g stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
-    <rect x="57" y="61" width="66" height="62" rx="7"/>
-    <path d="M75 51V70M105 51V70M57 82H123"/>
-    <path d="M73 99L86 111L108 89"/>
+  <rect x="10" y="10" width="160" height="160" rx="38" fill="url(#brand)"/>
+  <g fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="48" y="48" width="84" height="82" rx="13"/>
+    <path d="M70 38v20M110 38v20M49 76h82"/>
+    <path d="m70 103 15 14 29-31"/>
   </g>
-  <text x="198" y="94" fill="#172554" font-family="Arial, Helvetica, sans-serif" font-size="55" font-weight="800" letter-spacing="-2">Deadline</text>
-  <text x="424" y="94" fill="#6D28D9" font-family="Arial, Helvetica, sans-serif" font-size="55" font-weight="800" letter-spacing="-2">Zero</text>
-  <text x="201" y="128" fill="#64748B" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="600" letter-spacing="3">YOUR ACADEMIC OPERATING SYSTEM</text>
+  <text x="202" y="91" font-family="Arial,sans-serif" font-size="58" font-weight="800" fill="#111827">Deadline<tspan fill="#6D28D9">Zero</tspan></text>
+  <text x="205" y="126" font-family="Arial,sans-serif" font-size="17" font-weight="600" letter-spacing="4" fill="#64748B">YOUR ACADEMIC OPERATING SYSTEM</text>
 </svg>

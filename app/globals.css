@@ -5618,3 +5618,124 @@ td {
 }
 
 /* End: DEADLINEZERO FINAL DAY MODE POLISH */
+
+/* DEADLINEZERO DAY MODE OVERRIDE V2 */
+
+/* Force readable text throughout the application */
+body,
+body h1,
+body h2,
+body h3,
+body h4,
+body h5,
+body h6,
+body p,
+body span,
+body label,
+body strong,
+body small,
+body li,
+body td,
+body th,
+body a,
+body button,
+body input,
+body textarea,
+body select {
+  color: #17243a !important;
+}
+
+/* Main application surfaces */
+body,
+.workspace-root,
+.workspace-main,
+.workspace-content,
+.dz-shell,
+.dz-main,
+.dz-content {
+  background-color: #f5f7fb !important;
+  color: #17243a !important;
+}
+
+/* Sidebar and navigation */
+.workspace-rail,
+.dz-sidebar,
+.dz-rail {
+  background: #ffffff !important;
+  color: #17243a !important;
+  border-color: #e5eaf2 !important;
+}
+
+/* Focus Session: remove black backgrounds and white text */
+.focus-trigger,
+.dz-focus-trigger,
+.dz-focus-button,
+button[class*="focus"],
+[class*="focus-session"],
+[class*="focus-trigger"] {
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+  color: #17243a !important;
+  border: 1px solid #e1e7f0 !important;
+  box-shadow: 0 3px 12px rgba(25, 45, 85, 0.06) !important;
+}
+
+/* Focus control inner content and icons */
+.focus-trigger *,
+.dz-focus-trigger *,
+.dz-focus-button *,
+button[class*="focus"] *,
+[class*="focus-session"] *,
+[class*="focus-trigger"] * {
+  color: #17243a !important;
+  fill: currentColor;
+}
+
+/* Keep primary action buttons blue with white text */
+button[class*="primary"],
+button[type="submit"],
+.dz-primary-button {
+  background: #315ee8 !important;
+  color: #ffffff !important;
+  border-color: #315ee8 !important;
+}
+
+button[class*="primary"] *,
+button[type="submit"] *,
+.dz-primary-button * {
+  color: #ffffff !important;
+}
+
+/* Links and interactive navigation */
+.workspace-content a,
+.dz-content a {
+  color: #315ee8 !important;
+}
+
+/* Inputs */
+input,
+textarea,
+select {
+  background: #ffffff !important;
+  color: #17243a !important;
+  border-color: #dce3ee !important;
+}
+
+/* Dropdowns and experiment popovers */
+.profile-menu,
+.experiment-details-popover,
+.dz-profile-popover,
+.dz-experiment-popover {
+  background: #ffffff !important;
+  color: #17243a !important;
+  border-color: #e1e7f0 !important;
+}
+
+.profile-menu *,
+.experiment-details-popover *,
+.dz-profile-popover *,
+.dz-experiment-popover * {
+  color: #17243a !important;
+}
+
+/* END DEADLINEZERO DAY MODE OVERRIDE V2 */

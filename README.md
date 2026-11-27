@@ -1,162 +1,123 @@
-﻿<div align="center">
+<div align="center">
+  <img src="https://raw.githubusercontent.com/dharmkoshiya74-collab/DeadlineZero/master/public/deadlinezero-logo.svg" alt="DeadlineZero" width="360" />
 
-<img src="assets/deadlinezero-logo.svg" width="420" alt="DeadlineZero logo" />
+  <h1>Turn academic pressure into a plan.</h1>
+  <p><strong>Your academic operating system.</strong></p>
+  <p>Plan study work around real deadlines, build consistent sessions, track progress, and get help from an AI academic assistant.</p>
 
-### YOUR ACADEMIC LIFE, BROUGHT UNDER CONTROL.
+  <p>
+    <a href="https://deadline-zero-eta.vercel.app/"><img src="https://img.shields.io/badge/Launch%20DeadlineZero-6D28D9?style=for-the-badge&logo=vercel&logoColor=white" alt="Launch DeadlineZero" /></a>
+    <a href="https://github.com/dharmkoshiya74-collab/DeadlineZero"><img src="https://img.shields.io/badge/Source%20Code-181717?style=for-the-badge&logo=github&logoColor=white" alt="Source code" /></a>
+  </p>
 
-**Turn academic pressure into a plan. Turn your plan into progress.**
-
-<br/>
-
-<a href="https://deadline-zero-eta.vercel.app/">
-  <img src="https://img.shields.io/badge/OPEN_LIVE_APP-6D28D9?style=for-the-badge&logo=vercel&logoColor=white" />
-</a>
-<a href="https://github.com/dharmkoshiya74-collab/DeadlineZero">
-  <img src="https://img.shields.io/badge/VIEW_SOURCE-172554?style=for-the-badge&logo=github&logoColor=white" />
-</a>
-
-<br/><br/>
-
-![Next.js](https://img.shields.io/badge/Next.js-16-black?style=flat-square&logo=nextdotjs)
-![React](https://img.shields.io/badge/React-UI-149ECA?style=flat-square&logo=react)
-![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript)
-![Supabase](https://img.shields.io/badge/Supabase-3FCF8E?style=flat-square&logo=supabase&logoColor=white)
-![Flagsmith](https://img.shields.io/badge/Flagsmith-6D5AE6?style=flat-square)
-![Status](https://img.shields.io/badge/PROJECT-ACTIVE-16A34A?style=flat-square)
-
-<br/>
-
-**TEAM VORTEX** · WeMakeDevs Toggle Wars 2026 · Track 01 — Test Something Real
-
+  <p>
+    <img src="https://img.shields.io/badge/Next.js-16-black?logo=nextdotjs" alt="Next.js" />
+    <img src="https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white" alt="TypeScript" />
+    <img src="https://img.shields.io/badge/Supabase-Auth%20%26%20Data-3FCF8E?logo=supabase&logoColor=white" alt="Supabase" />
+    <img src="https://img.shields.io/badge/Flagsmith-Feature%20Flags-4B32C3" alt="Flagsmith" />
+    <img src="https://img.shields.io/badge/Hackathon-Toggle%20Wars%202026-111827" alt="Toggle Wars 2026" />
+  </p>
 </div>
 
 ---
 
-## 01 — The vision
+## The idea
 
-Students manage multiple subjects, assignments, examinations and deadlines. A normal to-do list can store tasks, but it does not necessarily help students decide how to distribute their study time.
+Students rarely struggle because they have nothing to do. They struggle because several subjects, assignments, and exams compete for the same limited hours.
 
-**DeadlineZero is an academic operating system** designed to bring planning, scheduling, study progress and AI assistance into one student workspace.
+A conventional checklist can record a deadline. It does not necessarily help a student turn that deadline into a realistic study routine.
 
-Our goal is simple:
+**DeadlineZero is built to close that gap.** It brings academic planning, scheduled study sessions, progress visibility, and AI-powered guidance into one workspace.
 
-> Help students understand what needs to be done, decide when to do it, and measure whether they are making progress.
+## What you can do
 
-## 02 — The product
+| Capability | What it does |
+|---|---|
+| **Study planning** | Create a plan with a subject, deadline, and estimated study time. |
+| **Smart Planner** | Uses available daily study time, difficulty, and priority to distribute work into study sessions. |
+| **Traditional Planner** | Offers a simpler planning experience for comparison. |
+| **Study calendar** | Review the sessions generated for your study plans. |
+| **Progress tracking** | See study work and completed sessions in one place. |
+| **AI academic assistant** | Ask for prioritisation, realistic schedules, recovery plans, progress-based suggestions, and help understanding topics. |
+| **Student accounts** | Sign in to keep each student's planning data associated with their account. |
 
-| Feature | What it does |
-|:--|:--|
-| **Smart Planner** | Generates study sessions using study duration, available time and plan details. |
-| **Traditional Planner** | Provides a simpler planning experience for comparison. |
-| **Study Calendar** | Organizes scheduled study sessions. |
-| **Progress Tracking** | Tracks completed study sessions and academic activity. |
-| **AI Assistant** | Helps with academic planning and study-related questions. |
-| **Authentication** | Provides student accounts and protected access. |
-| **Experimentation** | Compares planner experiences using Flagsmith. |
+## The experiment: test the experience, not the assumption
 
-## 03 — The experiment
+DeadlineZero is being built for **WeMakeDevs Toggle Wars 2026 — Track 01: Test Something Real**.
 
-<div align="center">
+We are testing one focused question:
 
-### DOES SMARTER PLANNING LEAD TO BETTER PLAN CREATION?
+> Does an intelligent study-planning experience improve successful study-plan creation compared with a traditional planning experience?
 
-We are testing whether the Smart Planner increases successful study-plan creation compared with the Traditional Planner.
+### Experiment design
 
-</div>
-
-### Experiment configuration
-
-| Setting | Value |
-|:--|:--|
-| Experiment | DeadlineZero Study Planner A/B v2 |
+| Element | Configuration |
+|---|---|
 | Feature flag | `study_planner_experience_v2` |
-| Control | `traditional_planner` |
-| Treatment | `smart_planner` |
-| Primary conversion | `study_plan_created` |
-| Secondary event | `study_session_completed` |
-| Experiment platform | Flagsmith |
+| Control variation | `traditional_planner` |
+| Treatment variation | `smart_planner` |
+| Primary event | `study_plan_created` |
+| Additional event | `study_session_completed` |
+| Feature-flag platform | Flagsmith |
 
-### Experiment flow
+Flagsmith identifies signed-in participants and supplies the assigned experiment variation. DeadlineZero records the relevant product events so the two experiences can be evaluated.
+
+**We do not publish invented conversion rates or claim a winning variation before the data supports it.** Results should be interpreted alongside participant count, exposure, and the limitations of the sample.
+
+## How it works
 
 ```mermaid
 flowchart TD
-    A([Student opens DeadlineZero]) --> B[Flagsmith evaluates feature flag]
-    B --> C{Assigned experience}
+    A[Student signs in] --> B[Flagsmith assigns an experience]
+    B --> C{Planner variation}
     C -->|Control| D[Traditional Planner]
     C -->|Treatment| E[Smart Planner]
-    D --> F[Student creates a plan]
+    D --> F[Student creates a study plan]
     E --> F
-    F --> G{Was the plan saved?}
-    G -->|Yes| H[Track study_plan_created]
-    G -->|No| I[Do not record conversion]
-    H --> J[Compare experiment outcomes]
-    I --> J
+    F --> G[DeadlineZero records study_plan_created]
+    G --> H[Student follows scheduled work]
+    H --> I[Completion event is recorded]
+    I --> J[Compare real product behaviour]
 ```
 
-### What we measure
+## Built with
 
-- Successful study-plan creation — primary metric.
-- Completed study sessions — supporting metric.
-- Participant feedback — qualitative insight.
+| Layer | Technology | Role |
+|---|---|---|
+| Web application | Next.js 16, React 19 | Application framework and interface |
+| Language | TypeScript | Typed application code |
+| Styling | Tailwind CSS 4 | Responsive interface styling |
+| Authentication & data | Supabase | Student authentication and application data |
+| Feature flags & experiments | Flagsmith | Variation assignment and event tracking |
+| AI assistant | Groq API | Streaming academic-assistant responses |
+| Deployment | Vercel | Hosted application |
 
-**We value honest experimentation.** We will not invent results or claim statistical significance from a small sample. Results should be interpreted in the context of the actual number of participants and conversions.
+## Run it locally
 
-## 04 — System architecture
-
-```mermaid
-flowchart LR
-    STUDENT[Student] --> APP[Next.js Application]
-    APP --> AUTH[Supabase Authentication]
-    APP --> DB[(Supabase Database)]
-    APP --> FLAGS[Flagsmith]
-    FLAGS --> VARIANTS[Planner Variations]
-    VARIANTS --> EVENTS[Experiment Events]
-    APP --> AI[AI Assistant API]
-    AI --> GROQ[Groq API]
-```
-
-## 05 — Technology
-
-<div align="center">
-
-| Layer | Technology |
-|:--|:--|
-| Frontend | Next.js, React, TypeScript |
-| Styling | Tailwind CSS |
-| Authentication | Supabase Auth |
-| Database | Supabase |
-| Feature management | Flagsmith |
-| AI assistance | Groq API |
-| Deployment | Vercel |
-
-</div>
-
-## 06 — Run locally
-
-### Prerequisites
+### Requirements
 
 - Node.js
 - npm
-- Supabase project
-- Flagsmith environment
-- Groq API key
+- A Supabase project
+- A Flagsmith environment
+- A Groq API key
 
-### Step 1 — Clone the repository
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/dharmkoshiya74-collab/DeadlineZero.git
 cd DeadlineZero
 ```
 
-### Step 2 — Install dependencies
+### 2. Install dependencies
 
 ```bash
 npm install
 ```
 
-### Step 3 — Configure environment variables
+### 3. Configure environment variables
 
-Copy `.env.example` to `.env.local` and configure your own credentials.
+Create a `.env.local` file in the project root:
 
 ```env
 NEXT_PUBLIC_SUPABASE_URL=
@@ -165,86 +126,59 @@ NEXT_PUBLIC_FLAGSMITH_ENVIRONMENT_ID=
 GROQ_API_KEY=
 ```
 
-Never commit `.env.local` or expose private API keys.
+Add the values from your own Supabase, Flagsmith, and Groq projects. Keep `.env.local` private; never commit credentials.
 
-### Step 4 — Start the development server
+### 4. Start the development server
 
 ```bash
 npm run dev
 ```
 
-Visit:
+Open [http://localhost:3000](http://localhost:3000).
 
-[http://localhost:3000](http://localhost:3000)
-
-### Step 5 — Production build
+### 5. Check the production build
 
 ```bash
 npm run build
 ```
 
-## 07 — Project structure
+## Repository map
 
 ```text
 DeadlineZero/
-│
 ├── app/
-│   ├── api/
-│   │   └── assistant/
-│   ├── login/
-│   ├── flagsmith-test/
-│   ├── globals.css
-│   ├── layout.tsx
-│   └── page.tsx
-│
-├── assets/
-│   └── deadlinezero-logo.svg
-│
-├── lib/
-├── public/
-├── .env.example
+│   ├── api/assistant/       # AI assistant API
+│   ├── login/               # Student sign-in and sign-up
+│   ├── flagsmith-test/      # Experiment testing route
+│   ├── globals.css          # Global styles
+│   ├── layout.tsx           # Root layout and metadata
+│   └── page.tsx             # Main application experience
+├── lib/                     # Shared application utilities
+├── public/                  # Static assets and brand mark
+├── .env.example             # Environment variable template
 ├── package.json
 └── README.md
 ```
 
-## 08 — Live project
+## Try the project
 
 <div align="center">
-
-### EXPERIENCE DEADLINEZERO
-
-<a href="https://deadline-zero-eta.vercel.app/">
-  <img src="https://img.shields.io/badge/LAUNCH_DEADLINEZERO-6D28D9?style=for-the-badge&logo=vercel&logoColor=white" />
-</a>
-
-**Live application:** https://deadline-zero-eta.vercel.app/
-
-**Source code:** https://github.com/dharmkoshiya74-collab/DeadlineZero
-
-**Demo video:** Add the final public or unlisted YouTube/Loom link here.
-
-</div>
-
-## 09 — The team
-
-<div align="center">
-
-### TEAM VORTEX
-
-Built for **WeMakeDevs Toggle Wars 2026**
-
-*Build with intent. Test with evidence. Improve with data.*
-
-<br/>
-
-<img src="assets/deadlinezero-logo.svg" width="260" alt="DeadlineZero" />
-
+  <h3>See DeadlineZero in action</h3>
+  <p>Open the deployed application and explore the student planning experience.</p>
+  <a href="https://deadline-zero-eta.vercel.app/"><strong>Open the live application →</strong></a>
 </div>
 
 ---
 
+## Team
+
+**Team Vortex**  
+Built for **WeMakeDevs Toggle Wars 2026**.
+
+---
+
 <div align="center">
-
-**DEADLINEZERO** · Make every study session count.
-
+  <sub>Designed around a simple belief: students deserve more than another to-do list.</sub>
+  <br />
+  <sub>DeadlineZero · Plan with purpose. Finish with confidence.</sub>
 </div>

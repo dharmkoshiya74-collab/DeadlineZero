@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;family=JetBrains+Mono:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "primary": "#cdffdc", "error-container": "#93000a", "error": "#ffb4ab", "on-background": "#e3e1e9", "on-tertiary-fixed-variant": "#004395", "secondary": "#c0c1ff", "surface-container": "#1e1f25", "background": "#121318", "surface-variant": "#34343a", "inverse-on-surface": "#2f3036", "on-secondary": "#1000a9", "tertiary-fixed": "#d8e2ff", "primary-fixed-dim": "#00e38f", "surface-container-low": "#1a1b21", "on-tertiary-fixed": "#001a42", "on-error-container": "#ffdad6", "on-primary-fixed-variant": "#005231", "primary-fixed": "#53ffab", "on-error": "#690005", "tertiary-fixed-dim": "#adc6ff", "on-surface-variant": "#b9cbbd", "on-tertiary": "#002e6a", "on-secondary-container": "#b0b2ff", "surface-tint": "#00e38f", "surface-container-lowest": "#0d0e13", "surface-dim": "#121318", "tertiary": "#f1f3ff", "on-secondary-fixed": "#07006c", "secondary-fixed-dim": "#c0c1ff", "surface-container-highest": "#34343a", "on-surface": "#e3e1e9", "secondary-fixed": "#e1e0ff", "on-primary-container": "#006b41", "on-primary-fixed": "#002111", "on-tertiary-container": "#0059c0", "surface": "#121318", "inverse-surface": "#e3e1e9", "outline": "#849588", "secondary-container": "#3131c0", "inverse-primary": "#006d42", "tertiary-container": "#c7d7ff", "surface-bright": "#38393f", "outline-variant": "#3b4a3f", "surface-container-high": "#292a2f", "primary-container": "#00f59b", "on-primary": "#003920", "on-secondary-fixed-variant": "#2f2ebe" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "space-lg": "1.25rem", "gutter-desktop": "1.5rem", "margin": "1rem", "space-xl": "2rem", "gutter": "1rem", "space-xs": "0.25rem", "space-md": "0.75rem", "margin-tablet": "1.5rem", "space-sm": "0.5rem", "margin-desktop": "2rem", "space-2xl": "3rem" }, "fontFamily": { "badge-caps": ["JetBrains Mono"], "headline-sm": ["Geist"], "code-inline": ["JetBrains Mono"], "label-mono-xs": ["JetBrains Mono"], "headline-lg-mobile": ["Geist"], "display-hero-mobile": ["Geist"], "body-md": ["Geist"], "body-lg": ["Geist"], "headline-md": ["Geist"], "headline-lg": ["Geist"], "body-sm": ["Geist"], "label-mono": ["JetBrains Mono"], "display-hero": ["Geist"] }, "fontSize": { "badge-caps": ["11px", { "lineHeight": "14px", "letterSpacing": "0.08em", "fontWeight": "600" }], "headline-sm": ["18px", { "lineHeight": "26px", "letterSpacing": "-0.01em", "fontWeight": "500" }], "code-inline": ["13px", { "lineHeight": "18px", "letterSpacing": "-0.01em", "fontWeight": "400" }], "label-mono-xs": ["10px", { "lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "500" }], "headline-lg-mobile": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }], "display-hero-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.025em", "fontWeight": "600" }], "body-md": ["14px", { "lineHeight": "22px", "letterSpacing": "0em", "fontWeight": "400" }], "body-lg": ["16px", { "lineHeight": "26px", "letterSpacing": "-0.005em", "fontWeight": "400" }], "headline-md": ["22px", { "lineHeight": "30px", "letterSpacing": "-0.015em", "fontWeight": "500" }], "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.025em", "fontWeight": "600" }], "body-sm": ["13px", { "lineHeight": "18px", "letterSpacing": "0em", "fontWeight": "400" }], "label-mono": ["12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "500" }], "display-hero": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.03em", "fontWeight": "600" }] } } } };</script></head><body class="bg-surface-container-lowest text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container"><aside class="fixed left-0 top-0 h-full w-60 bg-surface-container-lowest z-50 flex flex-col justify-between select-none"><div class="flex flex-col"><div class="h-14 px-space-md flex items-center justify-between"><div class="flex items-center gap-space-sm"><div class="w-6 h-6 flex items-center justify-center"><span class="material-symbols-outlined text-primary-fixed-dim text-[20px]">timelapse</span></div><div class="flex flex-col"><span class="font-badge-caps text-badge-caps text-on-surface tracking-wider font-semibold">DEADLINE//ZERO</span><span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant opacity-70">v2.4.0-prod</span></div></div><button aria-label="Collapse navigation pane" class="w-6 h-6 flex items-center justify-center rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[16px]">dock_to_left</span></button></div><div class="px-space-sm py-space-xs"><div class="h-[1px] w-full bg-surface-container-highest/60 mb-space-sm"></div></div><nav class="flex flex-col gap-1 px-space-sm" data-active-classes="bg-surface-container-high text-primary font-medium"><a class="flex items-center justify-between px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm group" data-path="command-center" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px] text-on-surface-variant group-hover:text-on-surface transition-colors">grid_view</span><span>Command Center</span></div><span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant opacity-50 group-hover:opacity-100">01</span></a><a class="flex items-center justify-between px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm group" data-path="study-planner" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px] text-on-surface-variant group-hover:text-on-surface transition-colors">auto_awesome</span><span>Study Planner</span></div><span class="font-label-mono-xs text-label-mono-xs px-1.5 py-0.5 rounded bg-secondary-container/40 text-secondary font-medium">A/B</span></a><a class="flex items-center justify-between px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm group" data-path="timeline-calendar" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px] text-on-surface-variant group-hover:text-on-surface transition-colors">calendar_today</span><span>Timeline &amp; Calendar</span></div><span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant opacity-50 group-hover:opacity-100">03</span></a><a class="flex items-center justify-between px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm group" data-path="performance-intelligence" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px] text-on-surface-variant group-hover:text-on-surface transition-colors">monitoring</span><span>Performance Intel</span></div><span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant opacity-50 group-hover:opacity-100">04</span></a><a class="flex items-center justify-between px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm group" data-path="ai-study-assistant" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px] text-on-surface-variant group-hover:text-on-surface transition-colors">psychology</span><span>AI Assistant</span></div><span class="font-label-mono-xs text-label-mono-xs text-primary-fixed-dim font-medium">v2</span></a><a class="flex items-center justify-between px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm group" data-path="settings-system" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px] text-on-surface-variant group-hover:text-on-surface transition-colors">tune</span><span>Settings &amp; System</span></div><span class="material-symbols-outlined text-[14px] text-on-surface-variant opacity-40 group-hover:opacity-80">lock</span></a></nav></div><div class="p-space-sm flex flex-col gap-space-sm"><div class="h-[1px] w-full bg-surface-container-highest/60"></div><div class="flex items-center justify-between px-space-sm py-1"><div class="flex items-center gap-2"><span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-fixed opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-primary-container"></span></span><span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">Supabase Cloud</span></div><span class="font-label-mono-xs text-label-mono-xs text-primary-fixed-dim">Live</span></div><div class="flex items-center justify-between px-space-sm py-1 bg-surface-container-low rounded"><span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">SYS_TIME</span><span class="font-label-mono-xs text-label-mono-xs text-on-surface font-semibold">14:32:08 UTC</span></div><button class="flex items-center justify-between px-space-sm py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors w-full font-label-mono-xs text-label-mono-xs" type="button"><span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[14px]">keyboard</span>Shortcuts</span><kbd class="px-1.5 py-0.5 rounded bg-surface-container-high text-on-surface font-label-mono-xs text-label-mono-xs">?</kbd></button></div></aside><div class="pl-60"><header class="fixed top-0 left-60 right-0 h-14 bg-surface-container-lowest/90 backdrop-blur-xl z-40 flex items-center justify-between px-space-lg select-none"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-sm bg-surface-container-low px-space-sm py-1 rounded"><span class="material-symbols-outlined text-[15px] text-primary-fixed-dim">school</span><span class="font-label-mono text-label-mono text-on-surface">Spring 2025</span><span class="text-on-surface-variant opacity-40 font-code-inline text-code-inline">/</span><span class="font-label-mono text-label-mono text-on-surface-variant">Week 9 of 16</span></div><div class="hidden xl:flex items-center gap-2 bg-surface-container px-2.5 py-1 rounded font-label-mono-xs text-label-mono-xs"><span class="h-1.5 w-1.5 rounded-full bg-secondary-fixed-dim"></span><span class="text-on-surface-variant">Flag:</span><span class="text-secondary font-medium">smart_planner [Treatment]</span><span class="text-outline-variant font-code-inline text-code-inline">|</span><span class="text-primary-fixed-dim font-medium">42ms sync</span></div></div><div class="flex items-center gap-space-md"><button class="flex items-center gap-space-md bg-surface-container-low hover:bg-surface-container px-space-sm py-1 rounded text-on-surface-variant hover:text-on-surface transition-colors" type="button"><div class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[16px]">search</span><span class="font-body-sm text-body-sm">Quick Command</span></div><div class="flex items-center gap-1"><kbd class="px-1 py-0.5 rounded bg-surface-container-high text-on-surface-variant font-label-mono-xs text-label-mono-xs">⌘</kbd><kbd class="px-1 py-0.5 rounded bg-surface-container-high text-on-surface-variant font-label-mono-xs text-label-mono-xs">K</kbd></div></button><button class="flex items-center gap-1.5 bg-primary-container text-on-primary-container hover:bg-primary-fixed transition-colors px-space-sm py-1 rounded font-body-sm text-body-sm font-medium" type="button"><span class="material-symbols-outlined text-[16px]">play_arrow</span><span>Focus 25m</span></button><button class="relative p-1.5 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[18px]">notifications</span><span class="absolute top-1 right-1 h-1.5 w-1.5 rounded-full bg-error"></span></button><div class="flex items-center gap-space-sm pl-space-xs"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/ALJJyrAqIAp8HCU2LayvOtb206VElRTh4r_Ng63MRvys3icyArfdxrVy2SaqCCKvru-unonqIk8CQPOUSAsMeZbAlD8kBllWRMNfhyNmXbOBL2FvcW2LyzxOsAo3PYGptqNLFnhPB0_4ZrV-mTKJXQyZ0Ilbc25H4Zzh1P5d0LbVQUrFc2Pznq5GEhBhAIp2MWqTEVMhVV3QWSWke4mFZ7ZIy3E9APeFlduJdUEG59A75bl9"/><div class="hidden md:flex flex-col text-left"><span class="font-body-sm text-body-sm font-medium text-on-surface leading-none">Alex Vance</span><span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant leading-none mt-1">Computer Science</span></div><span class="material-symbols-outlined text-[16px] text-on-surface-variant">expand_more</span></div></div></header><main class="w-full pt-14 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<!-- Subtle decorative ambient glow pinned locally to container canvas -->
+<div class="relative w-full overflow-hidden">
+<div class="absolute -top-40 right-20 w-96 h-96 bg-primary-container/5 rounded-full blur-3xl pointer-events-none"></div>
+<div class="absolute top-1/2 -left-20 w-80 h-80 bg-secondary-container/10 rounded-full blur-3xl pointer-events-none"></div>
+<!-- Workspace Utility Toolbar / Sub-Header -->
+<div class="w-full bg-surface-container-low px-margin-desktop py-space-sm flex flex-wrap items-center justify-between gap-y-space-sm">
+<div class="flex items-center gap-space-md">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<span class="font-badge-caps text-badge-caps text-on-surface tracking-wider uppercase">RESEARCH COPILOT // NODE_01</span>
+</div>
+<span class="font-label-mono-xs text-label-mono-xs px-2 py-0.5 rounded bg-surface-container-high text-primary-fixed-dim">HYPER-VECTORIZED</span>
+<div class="h-3 w-[1px] bg-surface-container-highest"></div>
+<span class="font-label-mono text-label-mono text-on-surface-variant flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px] text-primary-container">neurology</span>
+          Cognitive load: <span class="text-on-surface font-semibold">Nominal (Optimal retention window)</span>
+</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<div class="flex items-center bg-surface-container px-2.5 py-1 rounded gap-2">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">MODEL_CLUSTER</span>
+<span class="font-label-mono text-label-mono text-primary font-medium">claude-3-5-sonnet-academic</span>
+<span class="font-label-mono-xs text-label-mono-xs px-1.5 py-0.5 rounded bg-primary-container/10 text-primary-container">18ms</span>
+</div>
+<button class="bg-surface-container-high hover:bg-surface-container-highest text-on-surface px-space-sm py-1 rounded font-label-mono text-label-mono flex items-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-[14px]">tune</span>
+<span>Param: T=0.15</span>
+</button>
+<button class="bg-surface-container-high hover:bg-surface-container-highest text-on-surface-variant hover:text-on-surface px-space-sm py-1 rounded font-label-mono text-label-mono flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[15px]">history</span>
+<span>Index Tree</span>
+</button>
+</div>
+</div>
+<!-- Main Workspace Split Pane -->
+<div class="w-full px-margin-desktop py-space-lg flex flex-col xl:flex-row gap-gutter-desktop items-start">
+<!-- ================= LEFT COLUMN: CONTEXT & SYLLABUS RADAR (~320px) ================= -->
+<aside class="w-full xl:w-80 flex-shrink-0 flex flex-col gap-space-md">
+<!-- Active Syllabus Card -->
+<div class="bg-surface-container-low rounded-lg p-space-md flex flex-col gap-space-sm">
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-fixed-dim text-[18px]">account_tree</span>
+<span class="font-badge-caps text-badge-caps uppercase tracking-wider text-on-surface">Active Syllabus Context</span>
+</div>
+<span class="font-label-mono-xs text-label-mono-xs px-1.5 py-0.5 rounded bg-primary-container/15 text-primary-container font-semibold">LIVE RAG</span>
+</div>
+<!-- Primary Course Tile -->
+<div class="bg-surface-container p-space-sm rounded flex flex-col gap-2">
+<div class="flex items-start justify-between">
+<div>
+<div class="font-headline-sm text-headline-sm text-on-surface font-semibold leading-tight">CS 470</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Distributed Systems &amp; Consensus</div>
+</div>
+<span class="material-symbols-outlined text-primary-container text-[18px]">verified</span>
+</div>
+<!-- Vector Status Micro-Bar -->
+<div class="flex flex-col gap-1 pt-1">
+<div class="flex items-center justify-between font-label-mono-xs text-label-mono-xs text-on-surface-variant">
+<span>Ongaro 2014 &amp; Lab 2b</span>
+<span class="text-primary-fixed-dim font-medium">14/14 pgs indexed</span>
+</div>
+<div class="w-full h-1 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary-container w-full"></div>
+</div>
+</div>
+<div class="flex flex-wrap gap-1.5 pt-1">
+<span class="font-label-mono-xs text-label-mono-xs px-2 py-0.5 rounded bg-surface-container-high text-on-surface flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px] text-secondary">commit</span>
+                lab2b-raft.git
+              </span>
+<span class="font-label-mono-xs text-label-mono-xs px-2 py-0.5 rounded bg-surface-container-high text-on-surface-variant">
+                raft_rpc.go:88
+              </span>
+</div>
+</div>
+<!-- Secondary Synced Context Chips -->
+<div class="flex flex-col gap-1.5 pt-1">
+<span class="font-label-mono-xs text-label-mono-xs uppercase text-on-surface-variant/70 tracking-wider">Secondary Syllabi in Graph</span>
+<div class="flex items-center justify-between p-2 rounded bg-surface-container/60 hover:bg-surface-container transition-colors cursor-pointer group">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span class="font-body-sm text-body-sm text-on-surface group-hover:text-secondary transition-colors">Math 312: Measure Theory</span>
+</div>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">Lebesgue §4</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded bg-surface-container/60 hover:bg-surface-container transition-colors cursor-pointer group">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span>
+<span class="font-body-sm text-body-sm text-on-surface group-hover:text-on-surface transition-colors">Neuro 201: Neural Dynamics</span>
+</div>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">Hodgkin-Huxley</span>
+</div>
+</div>
+</div>
+<!-- Telemetry & Model Routing Hook -->
+<div class="bg-surface-container-low rounded-lg p-space-md flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-badge-caps text-badge-caps uppercase tracking-wider text-on-surface-variant">Flagsmith Routing Test</span>
+<span class="font-label-mono-xs text-label-mono-xs text-secondary-fixed">EXP-884-A/B</span>
+</div>
+<div class="grid grid-cols-2 gap-2">
+<div class="bg-surface-container p-2 rounded flex flex-col gap-0.5">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">ARM A (Active)</span>
+<span class="font-body-sm text-body-sm text-primary font-medium truncate">Claude 3.5 Sonnet</span>
+<span class="font-label-mono-xs text-label-mono-xs text-primary-fixed-dim">18ms • 99.4% acc</span>
+</div>
+<div class="bg-surface-container/50 p-2 rounded flex flex-col gap-0.5 opacity-60">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">ARM B (Shadow)</span>
+<span class="font-body-sm text-body-sm text-on-surface truncate">GPT-4o Academic</span>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">44ms • 98.1% acc</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-1 font-label-mono-xs text-label-mono-xs text-on-surface-variant">
+<span>Inference token speed</span>
+<span class="text-on-surface font-semibold">142 tps</span>
+</div>
+</div>
+<!-- Saved Synthesis Notes & Equations -->
+<div class="bg-surface-container-low rounded-lg p-space-md flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-secondary">functions</span>
+<span class="font-badge-caps text-badge-caps uppercase tracking-wider text-on-surface">Vectorized Lemmas</span>
+</div>
+<button class="font-label-mono-xs text-label-mono-xs text-primary hover:underline">Export TeX</button>
+</div>
+<div class="flex flex-col gap-2">
+<!-- Equation Token 1 -->
+<div class="p-2.5 rounded bg-surface-container flex flex-col gap-1.5 group cursor-pointer hover:bg-surface-container-high transition-colors">
+<div class="flex items-center justify-between font-label-mono-xs text-label-mono-xs text-on-surface-variant">
+<span>Raft Leader Completeness</span>
+<span class="material-symbols-outlined text-[14px] opacity-0 group-hover:opacity-100 transition-opacity text-primary">content_copy</span>
+</div>
+<div class="font-code-inline text-code-inline text-secondary-fixed bg-surface-container-lowest px-2 py-1 rounded">
+                $$v_{commit} \in \log(L_T) \implies \forall t &gt; T: v \in L_t$$
+              </div>
+</div>
+<!-- Equation Token 2 -->
+<div class="p-2.5 rounded bg-surface-container flex flex-col gap-1.5 group cursor-pointer hover:bg-surface-container-high transition-colors">
+<div class="flex items-center justify-between font-label-mono-xs text-label-mono-xs text-on-surface-variant">
+<span>Election Monotonicity Bound</span>
+<span class="material-symbols-outlined text-[14px] opacity-0 group-hover:opacity-100 transition-opacity text-primary">content_copy</span>
+</div>
+<div class="font-code-inline text-code-inline text-primary bg-surface-container-lowest px-2 py-1 rounded">
+                $$S_i \ge S_j \iff (t_i &gt; t_j) \lor (t_i = t_j \land c_i \ge c_j)$$
+              </div>
+</div>
+</div>
+</div>
+<!-- Suggested High-Impact Prompts -->
+<div class="bg-surface-container-low rounded-lg p-space-md flex flex-col gap-space-sm">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-primary-container">bolt</span>
+<span class="font-badge-caps text-badge-caps uppercase tracking-wider text-on-surface">1-Click Synthesis Prompts</span>
+</div>
+<div class="flex flex-col gap-2">
+<button class="w-full text-left p-2.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-all flex items-start gap-2 group">
+<span class="font-label-mono-xs text-label-mono-xs text-primary mt-0.5">01</span>
+<span class="font-body-sm text-body-sm leading-snug">Derive election safety proof invariants for Raft Lab 2b</span>
+</button>
+<button class="w-full text-left p-2.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-all flex items-start gap-2 group">
+<span class="font-label-mono-xs text-label-mono-xs text-primary mt-0.5">02</span>
+<span class="font-body-sm text-body-sm leading-snug">Audit my 14:00 study schedule against current cognitive deficit</span>
+</button>
+<button class="w-full text-left p-2.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-all flex items-start gap-2 group">
+<span class="font-label-mono-xs text-label-mono-xs text-primary mt-0.5">03</span>
+<span class="font-body-sm text-body-sm leading-snug">Generate LaTeX summary of today's Raft state machine sync</span>
+</button>
+<button class="w-full text-left p-2.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-all flex items-start gap-2 group">
+<span class="font-label-mono-xs text-label-mono-xs text-primary mt-0.5">04</span>
+<span class="font-body-sm text-body-sm leading-snug">Re-chunk my weekend problem set into 45m Pomodoros</span>
+</button>
+</div>
+</div>
+</aside>
+<!-- ================= RIGHT / CENTER COLUMN: INTERACTIVE COPILOT CHAT STREAM ================= -->
+<section class="flex-1 w-full min-w-0 flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden shadow-2xl">
+<!-- Stream Channel Header -->
+<div class="px-space-lg py-space-md bg-surface-container-low flex items-center justify-between flex-wrap gap-2">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded bg-primary-container/20 flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined text-[20px]">smart_toy</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Active Research Thread #419</span>
+<span class="font-label-mono-xs text-label-mono-xs px-2 py-0.5 rounded bg-secondary-container/30 text-secondary">CS470 / Distributed Systems</span>
+</div>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">Vector Anchor: Ongaro 2014 Section 5.4.1 (Election Restriction)</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-1.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors" title="Branch thread">
+<span class="material-symbols-outlined text-[18px]">fork_right</span>
+</button>
+<button class="p-1.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors" title="Export to Obsidian / Markdown">
+<span class="material-symbols-outlined text-[18px]">download</span>
+</button>
+<button class="p-1.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors" title="Clear thread">
+<span class="material-symbols-outlined text-[18px]">delete_sweep</span>
+</button>
+</div>
+</div>
+<!-- Thread Messages Stream -->
+<div class="p-space-lg flex flex-col gap-space-xl overflow-y-auto max-h-[calc(100vh-280px)]">
+<!-- Message 1: User -->
+<div class="flex flex-col items-end gap-1.5 pl-12">
+<div class="flex items-center gap-2 font-label-mono-xs text-label-mono-xs text-on-surface-variant">
+<span>Alex Vance (You)</span>
+<span>•</span>
+<span>13:38 UTC</span>
+<span class="material-symbols-outlined text-[12px] text-primary-container">done_all</span>
+</div>
+<div class="bg-surface-container-high text-on-surface p-space-md rounded-xl rounded-tr-none max-w-3xl shadow-sm">
+<p class="font-body-md text-body-md">
+                I'm hitting split-brain race conditions when simulating network partition in Raft election tests. How do I enforce term monotonicity before granting votes, and prevent a partitioned node with an outdated commit index from forcing unnecessary election churn once it reconnects?
+              </p>
+</div>
+</div>
+<!-- Message 2: AI Academic Copilot Response -->
+<div class="flex flex-col items-start gap-2 pr-4 md:pr-12">
+<div class="flex items-center gap-2.5 font-label-mono-xs text-label-mono-xs text-on-surface-variant">
+<div class="w-5 h-5 rounded-full bg-primary-container flex items-center justify-center text-on-primary font-bold text-[10px]">
+                DZ
+              </div>
+<span class="font-semibold text-primary">DeadlineZero Copilot</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant font-mono">claude-3-5-sonnet</span>
+<span>•</span>
+<span>13:39 UTC (took 412ms)</span>
+</div>
+<!-- Main Response Content Bubble -->
+<div class="w-full bg-surface-container rounded-xl rounded-tl-none p-space-lg flex flex-col gap-space-md">
+<!-- Cognitive Schedule Alert Box -->
+<div class="bg-surface-container-low p-space-md rounded-lg flex items-center justify-between gap-space-md">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded bg-primary-container/15 text-primary-container flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]">psychology_alt</span>
+</div>
+<div class="flex flex-col">
+<span class="font-badge-caps text-badge-caps uppercase tracking-wide text-primary-fixed-dim">Cognitive Diagnostic: High Focus Required</span>
+<span class="font-body-sm text-body-sm text-on-surface">You have a scheduled 90m deep-work block at <span class="font-semibold text-primary">13:45 UTC</span>. Re-allocation recommended.</span>
+</div>
+</div>
+<button class="px-space-sm py-1.5 rounded bg-primary-container text-on-primary font-label-mono text-label-mono font-medium hover:bg-primary-fixed transition-colors flex-shrink-0">
+                  Open Block IDE
+                </button>
+</div>
+<!-- Editorial Explanation -->
+<div class="flex flex-col gap-space-sm text-on-surface font-body-md text-body-md leading-relaxed">
+<p>
+                  To eliminate split-brain churn post-partition in <span class="font-code-inline text-code-inline text-primary bg-surface-container-high px-1.5 py-0.5 rounded">Raft Lab 2b</span>, you must enforce the <strong>Election Safety Invariant (Section 5.4.1)</strong> via strict two-tier log comparison and pre-vote phases before updating local state.
+                </p>
+<p class="text-on-surface-variant">
+                  When candidate $j$ requests a vote from node $i$, the candidate is at least as up-to-date as the receiver if and only if:
+                </p>
+<!-- LaTeX Callout Formula -->
+<div class="py-2 px-4 rounded bg-surface-container-low flex items-center justify-center">
+<div class="font-code-inline text-code-inline text-secondary text-base">
+                    $$S_j \ge S_i \iff (term_j^{last} &gt; term_i^{last}) \;\lor\; (term_j^{last} == term_i^{last} \;\land\; len(\log_j) \ge len(\log_i))$$
+                  </div>
+</div>
+<p>
+                  Crucially, if <span class="font-code-inline text-code-inline text-on-surface bg-surface-container-high px-1 rounded">args.Term &gt; rf.currentTerm</span>, step down immediately to <span class="font-code-inline text-code-inline text-secondary">Follower</span>, but <strong>do not grant the vote</strong> unless the candidate's log is strictly monotonic relative to your commit history.
+                </p>
+</div>
+<!-- Interactive Code Snippet (Go Implementation) -->
+<div class="w-full bg-surface-container-lowest rounded-lg overflow-hidden flex flex-col">
+<div class="px-space-md py-2 bg-surface-container-high flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="font-label-mono-xs text-label-mono-xs text-primary-container font-semibold">GO (Raft Consensus)</span>
+<span class="text-on-surface-variant text-label-mono-xs">raft/rpc_vote.go</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="font-label-mono-xs text-label-mono-xs text-on-surface-variant hover:text-on-surface flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">content_copy</span>
+<span>Copy snippet</span>
+</button>
+</div>
+</div>
+<pre class="p-space-md overflow-x-auto font-code-inline text-code-inline text-on-surface leading-normal"><code><span class="text-secondary">func</span> (rf *Raft) <span class="text-primary-container">RequestVote</span>(args *RequestVoteArgs, reply *RequestVoteReply) {
+    rf.mu.Lock()
+    <span class="text-secondary">defer</span> rf.mu.Unlock()
+
+    <span class="text-on-surface-variant/60">// Rule 1: Reject stale candidates</span>
+    <span class="text-secondary">if</span> args.Term &lt; rf.currentTerm {
+        reply.Term = rf.currentTerm
+        reply.VoteGranted = <span class="text-error">false</span>
+        <span class="text-secondary">return</span>
+    }
+
+    <span class="text-on-surface-variant/60">// Rule 2: Rule of Election Safety &amp; Monotonicity</span>
+    <span class="text-secondary">if</span> args.Term &gt; rf.currentTerm {
+        rf.currentTerm = args.Term
+        rf.state = Follower
+        rf.votedFor = -<span class="text-primary-fixed">1</span>
+        rf.persist()
+    }
+
+    lastLogIndex := len(rf.log) - <span class="text-primary-fixed">1</span>
+    lastLogTerm := rf.log[lastLogIndex].Term
+
+    isUpToDate := (args.LastLogTerm &gt; lastLogTerm) ||
+        (args.LastLogTerm == lastLogTerm &amp;&amp; args.LastLogIndex &gt;= lastLogIndex)
+
+    <span class="text-secondary">if</span> (rf.votedFor == -<span class="text-primary-fixed">1</span> || rf.votedFor == args.CandidateId) &amp;&amp; isUpToDate {
+        rf.votedFor = args.CandidateId
+        rf.lastHeartbeat = time.Now()
+        rf.persist()
+        reply.VoteGranted = <span class="text-primary-container">true</span>
+    } <span class="text-secondary">else</span> {
+        reply.VoteGranted = <span class="text-error">false</span>
+    }
+    reply.Term = rf.currentTerm
+}</code></pre>
+</div>
+<!-- Quick Execution Action Buttons -->
+<div class="flex flex-wrap items-center gap-space-sm pt-2">
+<button class="bg-surface-container-high hover:bg-surface-container-highest text-on-surface px-space-sm py-1.5 rounded font-label-mono text-label-mono flex items-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-[16px] text-primary-container">note_add</span>
+<span>Insert into Study Notes</span>
+</button>
+<button class="bg-surface-container-high hover:bg-surface-container-highest text-on-surface px-space-sm py-1.5 rounded font-label-mono text-label-mono flex items-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-[16px] text-secondary">timer</span>
+<span>Schedule 30m Deep Dive Block</span>
+</button>
+<button class="bg-surface-container-high hover:bg-surface-container-highest text-on-surface px-space-sm py-1.5 rounded font-label-mono text-label-mono flex items-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-[16px] text-primary-fixed">stethoscope_arrow</span>
+<span>Log in Git commit #a4f91</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Academic Prompt Input Dock -->
+<div class="p-space-md bg-surface-container-low flex flex-col gap-2">
+<!-- Context Attachment Badges -->
+<div class="flex items-center justify-between px-1 flex-wrap gap-2">
+<div class="flex items-center gap-1.5">
+<button class="px-2 py-1 rounded bg-surface-container text-on-surface-variant hover:text-on-surface text-label-mono-xs font-label-mono-xs flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[14px] text-primary-fixed-dim">attachment</span>
+<span>Attach Syllabus PDF</span>
+</button>
+<button class="px-2 py-1 rounded bg-surface-container text-on-surface-variant hover:text-on-surface text-label-mono-xs font-label-mono-xs flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[14px] text-secondary">terminal</span>
+<span>Pin Live Codebase (Lab 2b)</span>
+</button>
+<span class="font-label-mono-xs text-label-mono-xs px-2 py-0.5 rounded bg-primary-container/10 text-primary-container">
+                4 Contexts In Memory
+              </span>
+</div>
+<!-- Voice Dictation Toggle -->
+<button class="flex items-center gap-1.5 px-2 py-1 rounded bg-surface-container text-on-surface-variant hover:text-on-surface font-label-mono-xs text-label-mono-xs transition-colors">
+<span class="w-2 h-2 rounded-full bg-error animate-pulse"></span>
+<span>Whisper-v3 Ready</span>
+</button>
+</div>
+<!-- The Input Bar -->
+<div class="relative bg-surface-container rounded-lg p-2.5 flex items-center gap-3">
+<button class="text-on-surface-variant hover:text-on-surface p-1 rounded transition-colors" title="Voice Input">
+<span class="material-symbols-outlined text-[20px]">mic</span>
+</button>
+<input class="w-full bg-transparent text-on-surface placeholder:text-on-surface-variant/60 font-body-md text-body-md focus:outline-none" placeholder="Ask Copilot to synthesize proofs, diagnose bugs, or draft thesis notes..." type="text" value="Evaluate whether randomized election timeouts [150ms-300ms] suffice under 80ms network latency..."/>
+<!-- Model Selector Pill & Send Action -->
+<div class="flex items-center gap-2 flex-shrink-0">
+<div class="hidden sm:flex items-center bg-surface-container-high px-2 py-1 rounded text-label-mono-xs font-label-mono-xs text-on-surface-variant">
+<span>Claude 3.5</span>
+</div>
+<button class="bg-primary-container hover:bg-primary-fixed text-on-primary-container px-3 py-1.5 rounded font-body-sm text-body-sm font-semibold flex items-center gap-1.5 transition-colors shadow-sm">
+<span>Submit</span>
+<span class="material-symbols-outlined text-[16px]">arrow_upward</span>
+</button>
+</div>
+</div>
+<!-- Bottom Micro-Telemetry Legend -->
+<div class="flex items-center justify-between px-1 text-on-surface-variant/70 font-label-mono-xs text-label-mono-xs">
+<div class="flex items-center gap-2">
+<span>Return to send</span>
+<span>•</span>
+<span>Shift+Return for newline</span>
+</div>
+<div class="flex items-center gap-3">
+<span>Privacy: Local vector storage enforced</span>
+<span class="text-primary-container font-mono">Zero telemetry leakage</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</div></main></div></body></html>

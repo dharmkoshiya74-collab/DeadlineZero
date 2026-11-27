@@ -1,0 +1,418 @@
+<!DOCTYPE html><html class="dark" lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_dashboard" name="shell-type"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;family=JetBrains+Mono:wght@100..900&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "primary": "#cdffdc", "error-container": "#93000a", "error": "#ffb4ab", "on-background": "#e3e1e9", "on-tertiary-fixed-variant": "#004395", "secondary": "#c0c1ff", "surface-container": "#1e1f25", "background": "#121318", "surface-variant": "#34343a", "inverse-on-surface": "#2f3036", "on-secondary": "#1000a9", "tertiary-fixed": "#d8e2ff", "primary-fixed-dim": "#00e38f", "surface-container-low": "#1a1b21", "on-tertiary-fixed": "#001a42", "on-error-container": "#ffdad6", "on-primary-fixed-variant": "#005231", "primary-fixed": "#53ffab", "on-error": "#690005", "tertiary-fixed-dim": "#adc6ff", "on-surface-variant": "#b9cbbd", "on-tertiary": "#002e6a", "on-secondary-container": "#b0b2ff", "surface-tint": "#00e38f", "surface-container-lowest": "#0d0e13", "surface-dim": "#121318", "tertiary": "#f1f3ff", "on-secondary-fixed": "#07006c", "secondary-fixed-dim": "#c0c1ff", "surface-container-highest": "#34343a", "on-surface": "#e3e1e9", "secondary-fixed": "#e1e0ff", "on-primary-container": "#006b41", "on-primary-fixed": "#002111", "on-tertiary-container": "#0059c0", "surface": "#121318", "inverse-surface": "#e3e1e9", "outline": "#849588", "secondary-container": "#3131c0", "inverse-primary": "#006d42", "tertiary-container": "#c7d7ff", "surface-bright": "#38393f", "outline-variant": "#3b4a3f", "surface-container-high": "#292a2f", "primary-container": "#00f59b", "on-primary": "#003920", "on-secondary-fixed-variant": "#2f2ebe" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "space-lg": "1.25rem", "gutter-desktop": "1.5rem", "margin": "1rem", "space-xl": "2rem", "gutter": "1rem", "space-xs": "0.25rem", "space-md": "0.75rem", "margin-tablet": "1.5rem", "space-sm": "0.5rem", "margin-desktop": "2rem", "space-2xl": "3rem" }, "fontFamily": { "badge-caps": ["JetBrains Mono"], "headline-sm": ["Geist"], "code-inline": ["JetBrains Mono"], "label-mono-xs": ["JetBrains Mono"], "headline-lg-mobile": ["Geist"], "display-hero-mobile": ["Geist"], "body-md": ["Geist"], "body-lg": ["Geist"], "headline-md": ["Geist"], "headline-lg": ["Geist"], "body-sm": ["Geist"], "label-mono": ["JetBrains Mono"], "display-hero": ["Geist"] }, "fontSize": { "badge-caps": ["11px", { "lineHeight": "14px", "letterSpacing": "0.08em", "fontWeight": "600" }], "headline-sm": ["18px", { "lineHeight": "26px", "letterSpacing": "-0.01em", "fontWeight": "500" }], "code-inline": ["13px", { "lineHeight": "18px", "letterSpacing": "-0.01em", "fontWeight": "400" }], "label-mono-xs": ["10px", { "lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "500" }], "headline-lg-mobile": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }], "display-hero-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.025em", "fontWeight": "600" }], "body-md": ["14px", { "lineHeight": "22px", "letterSpacing": "0em", "fontWeight": "400" }], "body-lg": ["16px", { "lineHeight": "26px", "letterSpacing": "-0.005em", "fontWeight": "400" }], "headline-md": ["22px", { "lineHeight": "30px", "letterSpacing": "-0.015em", "fontWeight": "500" }], "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.025em", "fontWeight": "600" }], "body-sm": ["13px", { "lineHeight": "18px", "letterSpacing": "0em", "fontWeight": "400" }], "label-mono": ["12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "500" }], "display-hero": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.03em", "fontWeight": "600" }] } } } };</script></head><body class="bg-surface-container-lowest text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container"><aside class="fixed left-0 top-0 h-full w-60 bg-surface-container-lowest z-50 flex flex-col justify-between select-none"><div class="flex flex-col"><div class="h-14 px-space-md flex items-center justify-between"><div class="flex items-center gap-space-sm"><div class="w-6 h-6 flex items-center justify-center"><span class="material-symbols-outlined text-primary-fixed-dim text-[20px]">timelapse</span></div><div class="flex flex-col"><span class="font-badge-caps text-badge-caps text-on-surface tracking-wider font-semibold">DEADLINE//ZERO</span><span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant opacity-70">v2.4.0-prod</span></div></div><button aria-label="Collapse navigation pane" class="w-6 h-6 flex items-center justify-center rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[16px]">dock_to_left</span></button></div><div class="px-space-sm py-space-xs"><div class="h-[1px] w-full bg-surface-container-highest/60 mb-space-sm"></div></div><nav class="flex flex-col gap-1 px-space-sm" data-active-classes="bg-surface-container-high text-primary font-medium"><a class="flex items-center justify-between px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm group" data-path="command-center" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px] text-on-surface-variant group-hover:text-on-surface transition-colors">grid_view</span><span>Command Center</span></div><span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant opacity-50 group-hover:opacity-100">01</span></a><a aria-current="page" class="flex items-center justify-between px-space-sm py-2 rounded transition-colors group bg-surface-container-high text-primary font-medium" data-path="study-planner" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px] text-on-surface-variant group-hover:text-on-surface transition-colors">auto_awesome</span><span>Study Planner</span></div><span class="font-label-mono-xs text-label-mono-xs px-1.5 py-0.5 rounded bg-secondary-container/40 text-secondary font-medium">A/B</span></a><a class="flex items-center justify-between px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm group" data-path="timeline-calendar" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px] text-on-surface-variant group-hover:text-on-surface transition-colors">calendar_today</span><span>Timeline &amp; Calendar</span></div><span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant opacity-50 group-hover:opacity-100">03</span></a><a class="flex items-center justify-between px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm group" data-path="performance-intelligence" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px] text-on-surface-variant group-hover:text-on-surface transition-colors">monitoring</span><span>Performance Intel</span></div><span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant opacity-50 group-hover:opacity-100">04</span></a><a class="flex items-center justify-between px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm group" data-path="ai-study-assistant" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px] text-on-surface-variant group-hover:text-on-surface transition-colors">psychology</span><span>AI Assistant</span></div><span class="font-label-mono-xs text-label-mono-xs text-primary-fixed-dim font-medium">v2</span></a><a class="flex items-center justify-between px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm group" data-path="settings-system" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px] text-on-surface-variant group-hover:text-on-surface transition-colors">tune</span><span>Settings &amp; System</span></div><span class="material-symbols-outlined text-[14px] text-on-surface-variant opacity-40 group-hover:opacity-80">lock</span></a></nav></div><div class="p-space-sm flex flex-col gap-space-sm"><div class="h-[1px] w-full bg-surface-container-highest/60"></div><div class="flex items-center justify-between px-space-sm py-1"><div class="flex items-center gap-2"><span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-fixed opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-primary-container"></span></span><span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">Supabase Cloud</span></div><span class="font-label-mono-xs text-label-mono-xs text-primary-fixed-dim">Live</span></div><div class="flex items-center justify-between px-space-sm py-1 bg-surface-container-low rounded"><span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">SYS_TIME</span><span class="font-label-mono-xs text-label-mono-xs text-on-surface font-semibold">14:32:08 UTC</span></div><button class="flex items-center justify-between px-space-sm py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors w-full font-label-mono-xs text-label-mono-xs" type="button"><span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[14px]">keyboard</span>Shortcuts</span><kbd class="px-1.5 py-0.5 rounded bg-surface-container-high text-on-surface font-label-mono-xs text-label-mono-xs">?</kbd></button></div></aside><div class="pl-60"><header class="fixed top-0 left-60 right-0 h-14 bg-surface-container-lowest/90 backdrop-blur-xl z-40 flex items-center justify-between px-space-lg select-none"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-sm bg-surface-container-low px-space-sm py-1 rounded"><span class="material-symbols-outlined text-[15px] text-primary-fixed-dim">school</span><span class="font-label-mono text-label-mono text-on-surface">Spring 2025</span><span class="text-on-surface-variant opacity-40 font-code-inline text-code-inline">/</span><span class="font-label-mono text-label-mono text-on-surface-variant">Week 9 of 16</span></div><div class="hidden xl:flex items-center gap-2 bg-surface-container px-2.5 py-1 rounded font-label-mono-xs text-label-mono-xs"><span class="h-1.5 w-1.5 rounded-full bg-secondary-fixed-dim"></span><span class="text-on-surface-variant">Flag:</span><span class="text-secondary font-medium">smart_planner [Treatment]</span><span class="text-outline-variant font-code-inline text-code-inline">|</span><span class="text-primary-fixed-dim font-medium">42ms sync</span></div></div><div class="flex items-center gap-space-md"><button class="flex items-center gap-space-md bg-surface-container-low hover:bg-surface-container px-space-sm py-1 rounded text-on-surface-variant hover:text-on-surface transition-colors" type="button"><div class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[16px]">search</span><span class="font-body-sm text-body-sm">Quick Command</span></div><div class="flex items-center gap-1"><kbd class="px-1 py-0.5 rounded bg-surface-container-high text-on-surface-variant font-label-mono-xs text-label-mono-xs">⌘</kbd><kbd class="px-1 py-0.5 rounded bg-surface-container-high text-on-surface-variant font-label-mono-xs text-label-mono-xs">K</kbd></div></button><button class="flex items-center gap-1.5 bg-primary-container text-on-primary-container hover:bg-primary-fixed transition-colors px-space-sm py-1 rounded font-body-sm text-body-sm font-medium" type="button"><span class="material-symbols-outlined text-[16px]">play_arrow</span><span>Focus 25m</span></button><button class="relative p-1.5 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[18px]">notifications</span><span class="absolute top-1 right-1 h-1.5 w-1.5 rounded-full bg-error"></span></button><div class="flex items-center gap-space-sm pl-space-xs"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/ALJJyrAqIAp8HCU2LayvOtb206VElRTh4r_Ng63MRvys3icyArfdxrVy2SaqCCKvru-unonqIk8CQPOUSAsMeZbAlD8kBllWRMNfhyNmXbOBL2FvcW2LyzxOsAo3PYGptqNLFnhPB0_4ZrV-mTKJXQyZ0Ilbc25H4Zzh1P5d0LbVQUrFc2Pznq5GEhBhAIp2MWqTEVMhVV3QWSWke4mFZ7ZIy3E9APeFlduJdUEG59A75bl9"><div class="hidden md:flex flex-col text-left"><span class="font-body-sm text-body-sm font-medium text-on-surface leading-none">Alex Vance</span><span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant leading-none mt-1">Computer Science</span></div><span class="material-symbols-outlined text-[16px] text-on-surface-variant">expand_more</span></div></div></header><main class="w-full pt-14 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<!-- Flagsmith Experimentation Telemetry Banner -->
+<section class="w-full bg-surface-container-lowest px-space-lg py-space-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-space-sm border-b-0">
+<div class="flex items-center flex-wrap gap-space-sm">
+<div class="flex items-center gap-1.5 px-2 py-0.5 rounded bg-primary-container/10 text-primary-fixed-dim font-label-mono-xs text-label-mono-xs">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse"></span>
+<span>FLAGSMITH ENGINE v3.12</span>
+</div>
+<div class="h-3 w-[1px] bg-surface-variant hidden sm:block"></div>
+<span class="font-code-inline text-code-inline text-on-surface">
+<span class="text-on-surface-variant font-label-mono-xs">KEY:</span>
+<span class="text-secondary font-medium">study_planner_experience_v2</span>
+</span>
+<span class="text-outline-variant font-label-mono-xs">/</span>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">
+        VARIANT: <span class="px-1.5 py-0.2 bg-primary-container text-on-primary-container font-semibold rounded" id="flag-variant-badge">smart_planner (Treatment)</span>
+</span>
+<span class="text-outline-variant font-label-mono-xs">/</span>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">
+        GOAL: <code class="text-primary font-code-inline text-code-inline">study_plan_created</code>
+<span class="text-on-surface-variant opacity-70">(n=184 exposed, synced)</span>
+</span>
+</div>
+<!-- Variant Switcher Toggle -->
+<div class="flex items-center gap-2 self-end md:self-center">
+<div class="flex items-center bg-surface-container-low p-0.5 rounded">
+<button class="px-2.5 py-1 rounded font-label-mono-xs text-label-mono-xs transition-colors bg-primary-container text-on-primary-container font-semibold" id="toggle-treatment-btn" onclick="switchVariant('treatment')" type="button">
+          Treatment (Smart)
+        </button>
+<button class="px-2.5 py-1 rounded font-label-mono-xs text-label-mono-xs transition-colors text-on-surface-variant hover:text-on-surface" id="toggle-control-btn" onclick="switchVariant('control')" type="button">
+          Control (Manual)
+        </button>
+</div>
+<button class="w-7 h-7 flex items-center justify-center rounded bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors" onclick="toggleTelemetryModal()" title="View Payload &amp; Override JSON" type="button">
+<span class="material-symbols-outlined text-[15px]">code</span>
+</button>
+</div>
+</section>
+<!-- Telemetry Code Drawer (Flagsmith Raw Payload Modal) -->
+<div class="hidden bg-surface-container-high px-space-lg py-space-md" id="flagsmith-payload">
+<div class="flex items-center justify-between pb-space-xs">
+<span class="font-label-mono text-label-mono text-primary-fixed-dim flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px]">terminal</span>
+        FLAGSMITH_CONTEXT_EVALUATION :: user_uuid: "u_8829_alx"
+      </span>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">Deterministic Hash: 0x9AF2C1 (Bucket: 42)</span>
+</div>
+<pre class="font-code-inline text-code-inline text-on-surface bg-surface-container-lowest p-space-sm rounded overflow-x-auto leading-tight">{
+  "feature": "study_planner_experience_v2",
+  "assigned_variant": "smart_planner",
+  "state": "ACTIVE_EXPERIMENT",
+  "trackExposure": true,
+  "metrics": {
+    "exposure_event": "planner_mounted",
+    "conversion_target": "study_plan_created",
+    "retention_3d_event": "plan_block_completed"
+  },
+  "traits": {
+    "discipline": "Computer Science",
+    "semester": "Spring 2025",
+    "ai_features_enabled": true
+  }
+}</pre>
+</div>
+<!-- Content Container with Dynamic Toggle States -->
+<div class="px-space-md md:px-space-lg py-space-md flex flex-col gap-space-lg">
+<!-- TREATMENT VIEW: Smart Planner Experience -->
+<div class="flex flex-col gap-space-lg" id="treatment-view">
+<!-- Top Overview Bar & Micro-Telemetry -->
+<div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-space-md bg-surface-container-low p-space-md rounded">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded bg-primary-container/10 flex items-center justify-center text-primary-fixed-dim">
+<span class="material-symbols-outlined text-[24px]">psychology</span>
+</div>
+<div class="flex flex-col"><div class="flex items-center gap-2"><span class="font-headline-sm text-headline-sm text-on-surface">Smart Study Plan Generator — Balance Your Coursework &amp; Free Time</span><span class="px-1.5 py-0.5 rounded bg-primary-container text-on-primary-container font-badge-caps text-badge-caps uppercase">Algorithmic</span></div><span class="font-body-sm text-body-sm text-on-surface-variant">Algorithmic study chunking synced with Canvas LMS deadlines and your actual calendar gaps.</span></div>
+</div>
+<!-- Sync Health Chips -->
+<div class="flex items-center flex-wrap gap-2">
+<div class="flex items-center gap-1.5 bg-surface-container px-2.5 py-1 rounded">
+<span class="material-symbols-outlined text-[14px] text-primary-fixed-dim">sync</span>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">Canvas LMS:</span>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface font-semibold">4 Assignments Synced</span>
+</div>
+<div class="flex items-center gap-1.5 bg-surface-container px-2.5 py-1 rounded">
+<span class="material-symbols-outlined text-[14px] text-secondary">event_available</span>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">Free Windows:</span>
+<span class="font-label-mono-xs text-label-mono-xs text-secondary font-semibold">7.5h Available</span>
+</div>
+</div>
+</div>
+<!-- Main Layout Workbench: Grid Split (Config Panel & Interactive Timeline) -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-lg">
+<!-- Left Column: Generator Configuration Panel (5 cols) -->
+<div class="xl:col-span-5 flex flex-col gap-space-md">
+<div class="bg-surface-container-low p-space-md rounded flex flex-col gap-space-md shadow-sm">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-on-surface">Generator Setup</span>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">STAGE: READY</span>
+</div>
+<!-- Subject Multi-select Tags -->
+<div class="flex flex-col gap-1.5"><label class="font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase tracking-wider">Select Course / Assignment</label><div class="flex flex-wrap gap-1.5"><button class="px-2.5 py-1 rounded font-label-mono-xs text-label-mono-xs bg-primary-container text-on-primary-container font-semibold flex items-center gap-1" type="button"><span>CS 470: Distributed Systems</span><span class="material-symbols-outlined text-[12px]">check</span></button><button class="px-2.5 py-1 rounded font-label-mono-xs text-label-mono-xs bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" type="button">MATH 312: Real Analysis</button><button class="px-2.5 py-1 rounded font-label-mono-xs text-label-mono-xs bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" type="button">NEURO 201: Cellular Neurobiology</button><button class="px-2.5 py-1 rounded font-label-mono-xs text-label-mono-xs bg-surface-container-high text-primary hover:bg-surface-bright transition-colors flex items-center gap-1" type="button"><span class="material-symbols-outlined text-[12px]">add</span><span>Add Course from Canvas</span></button></div></div>
+<!-- Direct Deadline Association -->
+<div class="flex flex-col gap-1.5"><label class="font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase tracking-wider">Linked Deliverable</label><div class="bg-surface-container p-space-sm rounded flex items-center justify-between"><div class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-error animate-ping"></div><div class="flex flex-col"><span class="font-body-sm text-body-sm font-medium text-on-surface">CS 470 Consensus Lab (Raft/Paxos)</span><span class="font-label-mono-xs text-label-mono-xs text-error">Due Friday 11:59 PM (Canvas / Gradescope) · 41h remaining</span></div></div><span class="font-label-mono-xs text-label-mono-xs px-2 py-0.5 rounded bg-error-container text-on-error-container">Critical</span></div></div>
+<!-- Intensity & Session Splitting Slider -->
+<div class="flex flex-col gap-2"><div class="flex items-center justify-between"><label class="font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase tracking-wider">Target Study Workload &amp; Pace</label><span class="font-label-mono text-label-mono text-primary font-semibold">12.0 Hours / 4 Sessions</span></div><input class="w-full h-1.5 bg-surface-container rounded-lg appearance-none cursor-pointer accent-primary-container" max="20" min="4" type="range" value="12"><div class="flex items-center justify-between font-label-mono-xs text-label-mono-xs text-on-surface-variant"><span>Light (4h)</span><span class="text-primary font-medium">Balanced (50m Study / 10m Break)</span><span>Sprint (20h)</span></div></div>
+<!-- Calendar Availability Slot Telemetry -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase tracking-wider">Detected Free Gaps between Classes (synced with Google Calendar &amp; Class Timetable)</label>
+<div class="grid grid-cols-2 gap-2">
+<div class="bg-surface-container p-2 rounded flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface font-semibold">Thursday</span>
+<span class="font-label-mono-xs text-label-mono-xs text-primary-fixed-dim">3.5h avail</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded overflow-hidden">
+<div class="bg-primary-container h-full w-[70%]"></div>
+</div>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant opacity-75">09:00 - 11:00 &amp; 14:00 - 15:30</span>
+</div>
+<div class="bg-surface-container p-2 rounded flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface font-semibold">Friday</span>
+<span class="font-label-mono-xs text-label-mono-xs text-primary-fixed-dim">4.0h avail</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded overflow-hidden">
+<div class="bg-primary-container h-full w-[85%]"></div>
+</div>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant opacity-75">10:00 - 12:30 &amp; 16:00 - 17:30</span>
+</div>
+</div>
+</div>
+<!-- Flagsmith Primary Conversion CTA -->
+<div class="flex flex-col gap-2 pt-space-xs">
+<button class="w-full py-2.5 px-space-md rounded bg-primary-container text-on-primary-container hover:bg-primary-fixed font-body-sm text-body-sm font-semibold flex items-center justify-center gap-2 transition-all shadow-sm" id="generate-plan-cta" onclick="triggerFlagsmithConversion()" type="button">
+<span class="material-symbols-outlined text-[18px]">auto_awesome</span>
+<span>Generate Optimized Study Plan with AI</span>
+</button>
+<div class="flex items-center justify-between px-1">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-primary-fixed-dim">bolt</span>
+                  Flagsmith Metric: study_plan_created
+                </span>
+<span class="font-label-mono-xs text-label-mono-xs text-primary font-medium" id="conversion-counter">184 Hits Logged</span>
+</div>
+</div>
+<!-- Experiment Parity Notice -->
+<div class="bg-surface-container p-space-sm rounded flex items-start gap-2.5"><span class="material-symbols-outlined text-[16px] text-secondary mt-0.5">science</span><div class="flex flex-col"><span class="font-label-mono-xs text-label-mono-xs text-on-surface font-semibold">A/B Testing Active Pipeline</span><span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant leading-relaxed">Evaluating Flagsmith Smart Planner v2 against Traditional Fixed Timetable. Real student cohort conversion: +184.2% plan completion rate.</span></div></div>
+</div>
+<!-- Academic Context Image Card -->
+<div class="relative overflow-hidden rounded bg-surface-container-low p-space-md flex flex-col justify-end min-h-[160px]">
+<img class="absolute inset-0 w-full h-full object-cover opacity-20" data-alt="Close up dark aesthetic shot of a computer screen displaying high performance distributed systems code, terminal telemetry, and academic papers on consensus algorithms with dim neon lime rim reflections." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDRL6gWj7OVNV_pZcPwwZiaTwiLsVD1BOZVOX7UGPElH-MwBK6PT99pvvQEQR86LMmi_IhUb4A5y2HmVs0vW80lTheAPhVln996v6TBpPWZy1F1LyyQkMwY_qEXFatEeV2yIWmOCADaBRU2uPENSODmjpZNwZj8ekkFfrvO5KuS2SXhMwhw4uA8lh25gREU8XUxLxU3zfVhUTmCpeBNyzmiuzUcKw15ZNODIXpIAw">
+<div class="relative z-10 flex flex-col">
+<span class="font-label-mono-xs text-label-mono-xs text-primary font-semibold uppercase">Research Context</span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Raft Algorithm: Fault Tolerant State Machine</span>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">Stanford In Search of an Understandable Consensus Algorithm</span>
+</div>
+</div>
+</div>
+<!-- Right Column: Interactive AI Generated Timeline & Gantt Chunking (7 cols) -->
+<div class="xl:col-span-7 flex flex-col gap-space-md">
+<!-- Cognitive Load & Visual Breakdown Overview -->
+<div class="bg-surface-container-low p-space-md rounded flex flex-col gap-space-md shadow-sm">
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface">Cognitive Load Distribution</span>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">Optimized for high retention and zero burnout</span>
+</div>
+<!-- Timeline Legend -->
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-1.5 font-label-mono-xs text-label-mono-xs text-on-surface-variant">
+<span class="w-2.5 h-2.5 rounded bg-primary-container"></span>
+<span>Peak Energy (Deep)</span>
+</div>
+<div class="flex items-center gap-1.5 font-label-mono-xs text-label-mono-xs text-on-surface-variant">
+<span class="w-2.5 h-2.5 rounded bg-secondary"></span>
+<span>Review / Test</span>
+</div>
+<div class="flex items-center gap-1.5 font-label-mono-xs text-label-mono-xs text-on-surface-variant">
+<span class="w-2.5 h-2.5 rounded bg-surface-variant"></span>
+<span>Buffer</span>
+</div>
+</div>
+</div>
+<!-- Gantt Chunking Bar -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between font-label-mono-xs text-label-mono-xs text-on-surface-variant">
+<span>08:00</span>
+<span>12:00</span>
+<span>16:00</span>
+<span>20:00</span>
+<span>23:59 (Target Deadline)</span>
+</div>
+<div class="w-full h-7 bg-surface-container rounded flex overflow-hidden p-0.5 gap-0.5">
+<!-- Milestone 1 chunk -->
+<div class="h-full bg-primary-container/90 rounded flex items-center justify-center text-on-primary-container font-label-mono-xs text-label-mono-xs font-semibold px-2 cursor-pointer hover:opacity-90 transition-opacity" style="width: 28%;" title="Milestone 1: State Machine Replication">
+                  09:00 - 11:00 (2.0h)
+                </div>
+<!-- Free gap -->
+<div class="h-full bg-surface-container-highest/30 rounded" style="width: 12%;" title="Classes / Lunch break"></div>
+<!-- Milestone 2 chunk -->
+<div class="h-full bg-primary-container rounded flex items-center justify-center text-on-primary-container font-label-mono-xs text-label-mono-xs font-semibold px-2 cursor-pointer hover:opacity-90 transition-opacity" style="width: 32%;" title="Milestone 2: Leader Election">
+                  14:00 - 16:30 (2.5h)
+                </div>
+<!-- Buffer chunk -->
+<div class="h-full bg-surface-variant rounded flex items-center justify-center text-on-surface-variant font-label-mono-xs text-label-mono-xs" style="width: 8%;" title="Auto Buffer (+15%)">
+                  +15%
+                </div>
+<!-- Milestone 3 chunk (Friday simulated next chunk) -->
+<div class="h-full bg-secondary rounded flex items-center justify-center text-on-secondary font-label-mono-xs text-label-mono-xs font-semibold px-2 cursor-pointer hover:opacity-90 transition-opacity" style="width: 20%;" title="Milestone 3: Log Compaction">
+                  Fri 10:00 (2.5h)
+                </div>
+</div>
+<div class="flex items-center justify-between font-label-mono-xs text-label-mono-xs text-on-surface-variant pt-1">
+<span class="text-primary-fixed-dim">Algorithm Confidence: 98.4%</span>
+<span>Total Deep Time: 7.0h (Sprint phase 1)</span>
+</div>
+</div>
+</div>
+<!-- Generated AI Milestones (Detailed Cards) -->
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase tracking-wider">Scheduled Work Milestones (Generated from Syllabus)</span>
+<span class="font-label-mono-xs text-label-mono-xs text-primary">3 Milestones Synthesized</span>
+</div>
+<!-- Milestone 1 -->
+<div class="bg-surface-container-low p-space-md rounded flex flex-col gap-space-sm transition-all hover:bg-surface-container"><div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2"><div class="flex items-center gap-2.5"><span class="font-label-mono-xs text-label-mono-xs px-2 py-0.5 rounded bg-primary-container text-on-primary-container font-bold">M1</span><div class="flex flex-col"><span class="font-body-md text-body-md font-semibold text-on-surface">State Machine Replication Foundations</span><span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">Thursday 09:00 AM – 11:00 AM (2h) · High Focus</span></div></div><div class="flex items-center gap-2"><span class="font-label-mono-xs text-label-mono-xs px-2 py-0.5 rounded bg-surface-container-high text-primary font-medium">Prep + Sec 5.2 Review</span><span class="px-2 py-0.5 rounded bg-primary-container/20 text-primary-fixed-dim font-label-mono-xs text-label-mono-xs">Ready</span></div></div><p class="font-body-sm text-body-sm text-on-surface-variant">Implement determinism invariants and RPC message payload structs for term management. AI note: Tackling this in your 9 AM post-lecture focus window prevents cascading race conditions before section discussion.</p><div class="flex items-center justify-between pt-1 flex-wrap gap-2"><div class="flex items-center flex-wrap gap-2.5"><span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant flex items-center gap-1"><span class="material-symbols-outlined text-[13px] text-primary">timer</span> 4x 25m Pomodoros</span><span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant flex items-center gap-1"><span class="material-symbols-outlined text-[13px] text-secondary">sync</span> Canvas LMS Sync</span><span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant flex items-center gap-1"><span class="material-symbols-outlined text-[13px] text-primary-fixed-dim">code</span> Starter Code (GitHub)</span></div><button class="font-label-mono-xs text-label-mono-xs text-primary hover:underline flex items-center gap-1" type="button"><span>Open Notes</span><span class="material-symbols-outlined text-[12px]">arrow_forward</span></button></div></div>
+<!-- Milestone 2 -->
+<div class="bg-surface-container-low p-space-md rounded flex flex-col gap-space-sm transition-all hover:bg-surface-container"><div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2"><div class="flex items-center gap-2.5"><span class="font-label-mono-xs text-label-mono-xs px-2 py-0.5 rounded bg-secondary text-on-secondary font-bold">M2</span><div class="flex flex-col"><span class="font-body-md text-body-md font-semibold text-on-surface">Leader Election &amp; Heartbeat Simulation</span><span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">Thursday 02:00 PM – 04:30 PM (150 mins) · Huang Library Collab Space</span></div></div><div class="flex items-center gap-2"><span class="font-label-mono-xs text-label-mono-xs px-2 py-0.5 rounded bg-surface-container-high text-error font-medium">Difficulty: Hard</span><span class="px-2 py-0.5 rounded bg-secondary-container/40 text-secondary font-label-mono-xs text-label-mono-xs">Ready</span></div></div><p class="font-body-sm text-body-sm text-on-surface-variant">Simulate randomized election timers with lab partner and verify uncommitted term drops with split-brain network partition fuzzing in lab environment.</p><div class="flex items-center justify-between pt-1 flex-wrap gap-2"><div class="flex items-center flex-wrap gap-2.5"><span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant flex items-center gap-1"><span class="material-symbols-outlined text-[13px] text-primary">groups</span> Lab Partner Sync (Huang)</span><span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant flex items-center gap-1"><span class="material-symbols-outlined text-[13px] text-secondary">tune</span> Fuzzing Harness</span></div><button class="font-label-mono-xs text-label-mono-xs text-primary hover:underline flex items-center gap-1" type="button"><span>Open Notes</span><span class="material-symbols-outlined text-[12px]">arrow_forward</span></button></div></div>
+<!-- Milestone 3 -->
+<div class="bg-surface-container-low p-space-md rounded flex flex-col gap-space-sm transition-all hover:bg-surface-container"><div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2"><div class="flex items-center gap-2.5"><span class="font-label-mono-xs text-label-mono-xs px-2 py-0.5 rounded bg-surface-variant text-on-surface font-bold">M3</span><div class="flex flex-col"><span class="font-body-md text-body-md font-semibold text-on-surface">Log Compaction &amp; Final Snapshot Testing</span><span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">Friday 10:00 AM – 12:30 PM (150 mins) · Pre-submission Gradescope</span></div></div><div class="flex items-center gap-2"><span class="font-label-mono-xs text-label-mono-xs px-2 py-0.5 rounded bg-surface-container-high text-secondary font-medium">Difficulty: Med</span><span class="px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-label-mono-xs text-label-mono-xs">Scheduled</span></div></div><p class="font-body-sm text-body-sm text-on-surface-variant">Truncate persisted committed log entries and run pre-submission Gradescope test suites from raw snapshots before Friday 11:59 PM cutoff.</p><div class="flex items-center justify-between pt-1 flex-wrap gap-2"><div class="flex items-center flex-wrap gap-2.5"><span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant flex items-center gap-1"><span class="material-symbols-outlined text-[13px] text-primary">timer</span> 4x 25m Focus</span><span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant flex items-center gap-1"><span class="material-symbols-outlined text-[13px] text-primary-fixed-dim">verified</span> Gradescope Autograder</span></div><button class="font-label-mono-xs text-label-mono-xs text-primary hover:underline flex items-center gap-1" type="button"><span>Open Notes</span><span class="material-symbols-outlined text-[12px]">arrow_forward</span></button></div></div>
+</div>
+<!-- Schedule Adjustment & Flexibility Controls -->
+<div class="bg-surface-container-low p-space-md rounded flex flex-col sm:flex-row items-center justify-between gap-space-sm shadow-sm">
+<div class="flex items-center flex-wrap gap-2">
+<button class="px-3 py-1.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-mono-xs text-label-mono-xs transition-colors flex items-center gap-1.5" type="button">
+<span class="material-symbols-outlined text-[15px]">drag_indicator</span>
+<span>Reorder Milestones</span>
+</button>
+<button class="px-3 py-1.5 rounded bg-surface-container text-primary hover:bg-surface-container-high font-label-mono-xs text-label-mono-xs transition-colors flex items-center gap-1.5" id="buffer-toggle-btn" onclick="toggleBuffer()" type="button">
+<span class="material-symbols-outlined text-[15px]">timer</span>
+<span>Auto-Buffer (+15%)</span>
+</button>
+<button class="px-3 py-1.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-mono-xs text-label-mono-xs transition-colors flex items-center gap-1.5" type="button">
+<span class="material-symbols-outlined text-[15px]">cloud_sync</span>
+<span>Sync to Apple/Google</span>
+</button>
+</div>
+<button class="px-3 py-1.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-mono-xs text-label-mono-xs transition-colors flex items-center gap-1.5 self-end sm:self-center" type="button">
+<span class="material-symbols-outlined text-[15px]">download</span>
+<span>Export PDF Roadmap</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- CONTROL VIEW: Traditional Static Planner (Flagsmith Control Parity) -->
+<div class="hidden flex-col gap-space-lg" id="control-view">
+<div class="bg-surface-container-low p-space-md rounded flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded bg-surface-container flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[24px]">list_alt</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-on-surface">Traditional Manual Planner (Control)</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant font-badge-caps text-badge-caps uppercase">Baseline</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Static unweighted checklist without automated cognitive scheduling or dynamic calendar heuristics</span>
+</div>
+</div>
+<span class="font-label-mono-xs text-label-mono-xs text-secondary bg-secondary-container/20 px-2.5 py-1 rounded">Control Cohort (50%)</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md pt-2">
+<!-- Static Task Checklist -->
+<div class="md:col-span-2 bg-surface-container p-space-md rounded flex flex-col gap-space-sm">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase tracking-wider">Manual Assignment Checklist</span>
+<div class="flex items-center gap-3 p-2 bg-surface-container-low rounded">
+<input class="w-4 h-4 rounded bg-surface-container-highest accent-primary-container" type="checkbox">
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface">Read Chapter 5: Raft Paper</span>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">Manual estimate: ~3 hours</span>
+</div>
+</div>
+<div class="flex items-center gap-3 p-2 bg-surface-container-low rounded">
+<input class="w-4 h-4 rounded bg-surface-container-highest accent-primary-container" type="checkbox">
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface">Write Heartbeat Timer loop</span>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">Manual estimate: ~2 hours</span>
+</div>
+</div>
+<div class="flex items-center gap-3 p-2 bg-surface-container-low rounded">
+<input class="w-4 h-4 rounded bg-surface-container-highest accent-primary-container" type="checkbox">
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface">Run unit tests in lab terminal</span>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">Manual estimate: ~1 hour</span>
+</div>
+</div>
+<button class="w-full py-2 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface font-label-mono-xs text-label-mono-xs transition-colors flex items-center justify-center gap-1.5 mt-2" type="button">
+<span class="material-symbols-outlined text-[14px]">add</span>
+<span>Add Static Checklist Item</span>
+</button>
+</div>
+<!-- Control Baseline Stats -->
+<div class="bg-surface-container p-space-md rounded flex flex-col gap-space-sm justify-between">
+<div class="flex flex-col gap-2">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase tracking-wider">Control Variant Telemetry</span>
+<div class="p-2.5 bg-surface-container-low rounded flex flex-col gap-1">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">Assigned Cohort</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">49.8% Users</span>
+</div>
+<div class="p-2.5 bg-surface-container-low rounded flex flex-col gap-1">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">Conversion Rate (plan_created)</span>
+<span class="font-headline-sm text-headline-sm text-secondary font-semibold">24.2%</span>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">vs 68.7% in Smart Planner</span>
+</div>
+</div>
+<button class="w-full py-2 rounded bg-primary-container text-on-primary-container font-label-mono-xs text-label-mono-xs font-semibold hover:bg-primary-fixed transition-colors" onclick="switchVariant('treatment')" type="button">
+              Switch Back to Treatment
+            </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Comparative Flagsmith Results Matrix (Bento Box Micro-Dashboard) -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-space-md">
+<div class="bg-surface-container-low p-space-md rounded flex flex-col gap-1">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase">Confidence Interval</span>
+<span class="font-headline-md text-headline-md text-primary font-semibold">99.2%</span>
+<span class="font-label-mono-xs text-label-mono-xs text-primary-fixed-dim">P-value &lt; 0.001 (Statistically Sig)</span>
+</div>
+<div class="bg-surface-container-low p-space-md rounded flex flex-col gap-1">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase">Conversion Uplift</span>
+<span class="font-headline-md text-headline-md text-primary-fixed font-semibold">+184.2%</span>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">Treatment vs Control Baseline</span>
+</div>
+<div class="bg-surface-container-low p-space-md rounded flex flex-col gap-1">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase">Assignment Completion</span>
+<span class="font-headline-md text-headline-md text-secondary font-semibold">94.8%</span>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">Up from 71.4% Control</span>
+</div>
+<div class="bg-surface-container-low p-space-md rounded flex flex-col gap-1">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase">Edge Flag Latency</span>
+<span class="font-headline-md text-headline-md text-on-surface font-semibold">22ms</span>
+<span class="font-label-mono-xs text-label-mono-xs text-primary-fixed-dim">Supabase / Flagsmith Global Edge</span>
+</div>
+</div>
+</div>
+</div>
+<script>
+  let conversionCount = 184;
+
+  function switchVariant(variant) {
+    const treatmentView = document.getElementById('treatment-view');
+    const controlView = document.getElementById('control-view');
+    const badge = document.getElementById('flag-variant-badge');
+    const tBtn = document.getElementById('toggle-treatment-btn');
+    const cBtn = document.getElementById('toggle-control-btn');
+
+    if (variant === 'treatment') {
+      treatmentView.classList.remove('hidden');
+      controlView.classList.add('hidden');
+      badge.textContent = 'smart_planner (Treatment)';
+      badge.className = 'px-1.5 py-0.2 bg-primary-container text-on-primary-container font-semibold rounded';
+      tBtn.className = 'px-2.5 py-1 rounded font-label-mono-xs text-label-mono-xs transition-colors bg-primary-container text-on-primary-container font-semibold';
+      cBtn.className = 'px-2.5 py-1 rounded font-label-mono-xs text-label-mono-xs transition-colors text-on-surface-variant hover:text-on-surface';
+    } else {
+      treatmentView.classList.add('hidden');
+      controlView.classList.remove('hidden');
+      badge.textContent = 'traditional_manual (Control)';
+      badge.className = 'px-1.5 py-0.2 bg-surface-container-high text-on-surface font-semibold rounded';
+      cBtn.className = 'px-2.5 py-1 rounded font-label-mono-xs text-label-mono-xs transition-colors bg-surface-container-high text-on-surface font-semibold';
+      tBtn.className = 'px-2.5 py-1 rounded font-label-mono-xs text-label-mono-xs transition-colors text-on-surface-variant hover:text-on-surface';
+    }
+  }
+
+  function toggleTelemetryModal() {
+    const el = document.getElementById('flagsmith-payload');
+    el.classList.toggle('hidden');
+  }
+
+  function triggerFlagsmithConversion() {
+    conversionCount++;
+    const counter = document.getElementById('conversion-counter');
+    counter.textContent = conversionCount + ' Hits Logged';
+    
+    // Brief visual feedback on button
+    const btn = document.getElementById('generate-plan-cta');
+    const originalHtml = btn.innerHTML;
+    btn.innerHTML = '<span class="material-symbols-outlined text-[18px] text-on-primary-container animate-spin">refresh</span><span>Synthesizing Micro-Schedule...</span>';
+    btn.disabled = true;
+
+    setTimeout(() => {
+      btn.innerHTML = '<span class="material-symbols-outlined text-[18px]">done_all</span><span>Plan Generated & Telemetry Emitted!</span>';
+      setTimeout(() => {
+        btn.innerHTML = originalHtml;
+        btn.disabled = false;
+      }, 1500);
+    }, 600);
+  }
+
+  function toggleBuffer() {
+    const btn = document.getElementById('buffer-toggle-btn');
+    if (btn.classList.contains('text-primary')) {
+      btn.classList.remove('text-primary');
+      btn.classList.add('text-on-surface-variant');
+      btn.innerHTML = '<span class="material-symbols-outlined text-[15px]">timer_off</span><span>Auto-Buffer (Off)</span>';
+    } else {
+      btn.classList.add('text-primary');
+      btn.classList.remove('text-on-surface-variant');
+      btn.innerHTML = '<span class="material-symbols-outlined text-[15px]">timer</span><span>Auto-Buffer (+15%)</span>';
+    }
+  }
+</script></main></div>
+
+</body></html>

@@ -1,0 +1,6 @@
+.env*
+!.env.example
+*.zip
+DEADLINEZERO-STITCH-IMPLEMENTATION-PROMPT.md
+design-reference/
+app/page.*.tsx

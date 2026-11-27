@@ -2,28 +2,52 @@
 
 import { useEffect, useRef, useState, type FormEvent, type KeyboardEvent } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { EmptyState, MonoLabel, PageHeading, Panel } from "@/components/academic-ui";
 import { MaterialIcon } from "@/components/material-icon";
+import { StudyCompanionPicker } from "@/components/study-companions";
 import { supabase } from "@/lib/supabase";
 import { useWorkspace } from "@/lib/workspace-context";
 import { calculateProgress, formatDate } from "@/lib/study-utils";
+import {
+  isAssistantResponse,
+  type AssistantPlanDraft,
+} from "@/lib/assistant-types";
 
 type ChatMessage = {
   role: "user" | "assistant";
   content: string;
+  plan?: AssistantPlanDraft;
+  planSaved?: boolean;
 };
 
 const initialMessage: ChatMessage = {
   role: "assistant",
   content:
-    "Hi! I can help you review the study plans and sessions you’ve saved, or think through your next study block. What would you like to work on?",
+    "Hi! Ask me about any subject, assignment, or study challenge. I’ll explain it clearly and can draft a practical study plan for you to review.",
 };
+
+function formatMinutes(minutes: number) {
+  const hours = Math.floor(minutes / 60);
+  const remainingMinutes = minutes % 60;
+  if (!hours) return `${remainingMinutes} min`;
+  return remainingMinutes
+    ? `${hours} hr ${remainingMinutes} min`
+    : `${hours} hr`;
+}
 
 export function AIAssistant() {
   const router = useRouter();
-  const { tasks, sessions, userId, email, today } = useWorkspace();
+  const {
+    tasks,
+    sessions,
+    userId,
+    email,
+    today,
+    createPlan,
+    saving,
+    isSmart,
+  } = useWorkspace();
   const [messages, setMessages] = useState<ChatMessage[]>([initialMessage]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -38,7 +62,7 @@ export function AIAssistant() {
     "Review my scheduled sessions for today.",
     upcoming[0]
       ? `Help me make a realistic study plan for ${upcoming[0].subject}.`
-      : "What can I do with the study data I have recorded?",
+      : "Explain a topic and make me a study plan.",
   ];
 
   useEffect(() => {
@@ -74,6 +98,7 @@ export function AIAssistant() {
 
       const accessToken = sessionData.session?.access_token;
       if (!accessToken) {
+        setMessages(nextMessages);
         router.push("/login");
         return;
       }
@@ -102,6 +127,7 @@ export function AIAssistant() {
               completionRate: progress.completionRate,
               currentStreak: progress.currentStreak,
             },
+            today,
           },
         }),
       });
@@ -114,45 +140,25 @@ export function AIAssistant() {
             : "The AI assistant could not respond. Please try again.",
         );
       }
-      if (!response.body) {
-        throw new Error("Streaming is not supported by this response.");
+      const result: unknown = await response.json();
+      if (!isAssistantResponse(result)) {
+        throw new Error("The AI assistant returned an invalid response. Please try again.");
       }
 
-      const reader = response.body.getReader();
-      const decoder = new TextDecoder();
-
-      while (true) {
-        const { value, done } = await reader.read();
-        if (done) break;
-        const chunk = decoder.decode(value, { stream: true });
-
-        setMessages((current) => {
-          const updated = [...current];
-          const last = updated[updated.length - 1];
-          if (last?.role === "assistant") {
-            updated[updated.length - 1] = {
-              ...last,
-              content: last.content + chunk,
-            };
-          }
-          return updated;
-        });
-      }
-
-      const finalChunk = decoder.decode();
-      if (finalChunk) {
-        setMessages((current) => {
-          const updated = [...current];
-          const last = updated[updated.length - 1];
-          if (last?.role === "assistant") {
-            updated[updated.length - 1] = {
-              ...last,
-              content: last.content + finalChunk,
-            };
-          }
-          return updated;
-        });
-      }
+      setMessages((current) => {
+        const updated = [...current];
+        const lastIndex = updated.length - 1;
+        const last = updated[lastIndex];
+        if (last?.role === "assistant") {
+          updated[lastIndex] = {
+            ...last,
+            content: result.answer,
+            plan: result.plan ?? undefined,
+            planSaved: false,
+          };
+        }
+        return updated;
+      });
     } catch (requestError) {
       console.error("AI assistant request failed:", requestError);
       setError(
@@ -168,6 +174,28 @@ export function AIAssistant() {
       });
     } finally {
       setLoading(false);
+    }
+  }
+
+  async function saveAssistantPlan(
+    messageIndex: number,
+    plan: AssistantPlanDraft,
+  ) {
+    const saved = await createPlan({
+      subject: plan.subject,
+      deadline: plan.deadline,
+      estimatedMinutes: String(plan.estimatedMinutes),
+      difficulty: plan.difficulty,
+      priority: plan.priority,
+      availableMinutes: String(plan.availableMinutes),
+    });
+
+    if (saved) {
+      setMessages((current) =>
+        current.map((message, index) =>
+          index === messageIndex ? { ...message, planSaved: true } : message,
+        ),
+      );
     }
   }
 
@@ -193,22 +221,9 @@ export function AIAssistant() {
       <PageHeading
         eyebrow="A STUDY COMPANION"
         title="Talk through your next step"
-        description="Ask about your saved plans, sessions, or a study topic."
+        description="Ask any student question for a clear answer and a study plan you can review before saving."
       />
-      <section aria-label="Study companions" className="assistant-companion-banner">
-        <Image
-          alt="Byte the red panda, Newton the cat, and Ada the axolotl"
-          className="assistant-companion-art"
-          height={576}
-          src="/images/study-companions.png"
-          width={1024}
-        />
-        <div>
-          <MonoLabel>MEET YOUR STUDY COMPANIONS</MonoLabel>
-          <h2>Byte · Newton · Ada</h2>
-          <p>Friendly faces for the study plans and sessions you save here.</p>
-        </div>
-      </section>
+      <StudyCompanionPicker />
       <div className="assistant-telemetry">
         <div>
           <span className="status-dot online" />
@@ -277,7 +292,7 @@ export function AIAssistant() {
             <div className="thread-avatar"><MaterialIcon name="smart_toy" size={19} /></div>
             <div className="thread-header-copy">
               <strong>DeadlineZero AI</strong>
-              <span>{userId ? "Ready to help with your study data" : "Sign in to start a conversation"}</span>
+              <span>{userId ? "Ready to answer questions and draft study plans" : "Sign in to start a conversation"}</span>
             </div>
             <span className="thread-status"><span className="status-dot online" /> READY</span>
           </header>
@@ -299,6 +314,79 @@ export function AIAssistant() {
                       <span className="thinking-indicator"><i /><i /><i /> Thinking…</span>
                     ) : null)}
                   </div>
+                  {message.plan && (
+                    <section
+                      aria-label="Suggested study plan"
+                      className="assistant-plan-card"
+                    >
+                      <div className="assistant-plan-heading">
+                        <span className="assistant-plan-icon">
+                          <MaterialIcon name="auto_awesome" size={16} />
+                        </span>
+                        <div>
+                          <p>AI STUDY PLAN</p>
+                          <h3>{message.plan.subject}</h3>
+                        </div>
+                      </div>
+                      <div className="assistant-plan-metrics">
+                        <div>
+                          <span>Deadline</span>
+                          <strong>
+                            {formatDate(message.plan.deadline, {
+                              month: "short",
+                              day: "numeric",
+                              year: "numeric",
+                            })}
+                          </strong>
+                          {message.plan.deadlineSource === "suggested" && (
+                            <small>Suggested · editable</small>
+                          )}
+                        </div>
+                        <div>
+                          <span>Study time</span>
+                          <strong>{formatMinutes(message.plan.estimatedMinutes)}</strong>
+                        </div>
+                        <div>
+                          <span>Suggested daily availability</span>
+                          <strong>{formatMinutes(message.plan.availableMinutes)}</strong>
+                        </div>
+                        <div>
+                          <span>Level · priority</span>
+                          <strong>
+                            {message.plan.difficulty} · {message.plan.priority}
+                          </strong>
+                        </div>
+                      </div>
+                      <ol className="assistant-plan-steps">
+                        {message.plan.steps.map((step, stepIndex) => (
+                          <li key={`${stepIndex}-${step}`}>{step}</li>
+                        ))}
+                      </ol>
+                      <p className="assistant-plan-note">
+                        {isSmart
+                          ? "Adding this plan also creates sessions with the Smart planner using the suggested daily availability."
+                          : "Adding this plan saves it to Study Plans. Manual mode stores its default 60 min/day availability and does not auto-create sessions."}
+                      </p>
+                      <button
+                        className="button-secondary assistant-plan-save"
+                        disabled={!userId || saving || message.planSaved}
+                        onClick={() => {
+                          if (message.plan) {
+                            void saveAssistantPlan(index, message.plan);
+                          }
+                        }}
+                        type="button"
+                      >
+                        <MaterialIcon
+                          name={message.planSaved ? "check_circle" : "add"}
+                          size={16}
+                        />
+                        <span>
+                          {message.planSaved ? "Added to study plans" : "Add to my study plans"}
+                        </span>
+                      </button>
+                    </section>
+                  )}
                 </div>
                 {message.role === "user" && <div className="chat-user-avatar">{email ? email.charAt(0).toUpperCase() : "S"}</div>}
               </article>
@@ -325,7 +413,7 @@ export function AIAssistant() {
             </button>
             <div className="composer-hint">
               <span>Enter to send · Shift + Enter for a new line</span>
-              <span>Suggestions are not saved to your schedule.</span>
+              <span>AI plans stay drafts until you choose to add them.</span>
             </div>
           </form>
 

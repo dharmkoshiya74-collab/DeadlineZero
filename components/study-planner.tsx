@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState, type FormEvent } from "react";
-import { EmptyState, MonoLabel, Panel } from "@/components/academic-ui";
+import { EmptyState, MonoLabel, PageHeading, Panel } from "@/components/academic-ui";
 import { MaterialIcon } from "@/components/material-icon";
 import { useWorkspace } from "@/lib/workspace-context";
 import { formatDate, generateStudySchedule } from "@/lib/study-utils";
@@ -15,6 +15,7 @@ export function StudyPlanner() {
     saving,
     isSmart,
     experimentConnected,
+    experimentLoading,
     today,
     createPlan,
     removePlan,
@@ -71,18 +72,42 @@ export function StudyPlanner() {
     sessions: sessions.filter((session) => session.plan_id === task.id),
   }));
 
+  if (experimentLoading) {
+    return (
+      <div className="page-stack">
+        <PageHeading
+          eyebrow="FLAGSMITH EXPERIMENT"
+          title="Preparing your planner"
+          description="We’re waiting for Flagsmith to confirm your assigned version so the test stays consistent."
+        />
+        <Panel eyebrow="EXPERIMENT ASSIGNMENT" title="Loading your planner version">
+          <div className="experiment-status" role="status">
+            <span className="status-dot online" />
+            <span>Checking your Flagsmith assignment…</span>
+          </div>
+        </Panel>
+      </div>
+    );
+  }
+
   return (
     <div className="page-stack">
       <div className="planner-experiment-strip">
         <div className="experiment-strip-main">
           <span className={`status-dot${experimentConnected ? " online" : ""}`} />
-          <span>Your planner style</span>
+          <span>{experimentConnected ? "Assigned variation" : "Planner status"}</span>
           <strong className={experimentConnected ? "variation-live" : "variation-unavailable"}>
-            {experimentConnected ? (isSmart ? "Smart schedule" : "Manual plan") : "Not assigned"}
+            {experimentConnected
+              ? isSmart
+                ? "Treatment · Smart schedule"
+                : "Control · Traditional plan"
+              : "Manual fallback · not enrolled"}
           </strong>
         </div>
         <div className="planner-experiment-detail">
-          {experimentConnected ? "Personalized for your study style" : "Planner assignment unavailable"}
+          {experimentConnected
+            ? "Randomly assigned by Flagsmith; this group cannot be changed here."
+            : "Flagsmith has no active assignment. Plans created now won’t count toward the experiment."}
         </div>
       </div>
 
@@ -293,7 +318,7 @@ export function StudyPlanner() {
 
       <div className="planner-footnote">
         <MaterialIcon name="bolt" size={15} />
-        <span>Your plan style is assigned automatically. Creating a plan records the existing <code>study_plan_created</code> event when you’re enrolled.</span>
+        <span>Flagsmith assigns the planner version. A successful save records <code>study_plan_created</code> for enrolled participants.</span>
       </div>
     </div>
   );

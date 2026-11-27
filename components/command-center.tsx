@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { EmptyState, Panel } from "@/components/academic-ui";
 import { MaterialIcon } from "@/components/material-icon";
 import { useWorkspace } from "@/lib/workspace-context";
@@ -76,28 +75,15 @@ export function CommandCenter() {
           </p>
         </div>
         <div className="dashboard-welcome-actions">
-          <div className="dashboard-companion-card">
-            <Image
-              alt="Byte the red panda, Newton the cat, and Ada the axolotl"
-              className="dashboard-companion-art"
-              height={576}
-              src="/images/study-companions.png"
-              width={1024}
-            />
-            <span>
-              <strong>Study companions</strong>
-              <small>Byte · Newton · Ada</small>
-            </span>
-          </div>
           {experimentConnected && (
             <span className="planner-style-badge">
               <MaterialIcon name={isSmart ? "auto_awesome" : "edit_note"} size={16} />
               {isSmart ? "Smart schedule" : "Plan it yourself"}
             </span>
           )}
-          <Link className="button-primary" href="/study-planner">
-            <MaterialIcon name="add" size={17} />
-            Make a study plan
+          <Link className="button-primary" href={userId ? "/study-planner" : "/login"}>
+            <MaterialIcon name={userId ? "add" : "login"} size={17} />
+            {userId ? "Make a study plan" : "Sign in to get started"}
           </Link>
         </div>
       </header>
@@ -159,7 +145,18 @@ export function CommandCenter() {
               <EmptyState
                 title={sessionsLoading ? "Loading your schedule" : "You have room for a fresh start"}
                 description={sessionsLoading ? "Your study sessions are being retrieved." : "There’s no study block scheduled for today. Make a plan when you’re ready."}
-                action={<Link className="button-primary" href="/study-planner"><MaterialIcon name="auto_awesome" size={16} /> Plan a study session</Link>}
+                action={
+                  <Link
+                    className="button-primary"
+                    href={userId ? "/study-planner" : "/login"}
+                  >
+                    <MaterialIcon
+                      name={userId ? "auto_awesome" : "login"}
+                      size={16}
+                    />
+                    {userId ? "Plan a study session" : "Sign in to make a plan"}
+                  </Link>
+                }
               />
             )}
           </Panel>

@@ -3,6 +3,7 @@
 import { useMemo, useState, type ReactNode } from "react";
 import Link from "next/link";
 import { EmptyState, MonoLabel, PageHeading, Panel } from "@/components/academic-ui";
+import { ExperimentReadout } from "@/components/experiment-readout";
 import { MaterialIcon } from "@/components/material-icon";
 import { useWorkspace } from "@/lib/workspace-context";
 import { calculateProgress, dateFromKey, formatDate, getDateKey } from "@/lib/study-utils";
@@ -109,6 +110,8 @@ export function PerformanceIntelligence() {
           ))}
         </div>
       </div>
+
+      <ExperimentReadout />
 
       {userId && !sessionsLoading && (
         <Panel

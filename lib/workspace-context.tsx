@@ -45,6 +45,7 @@ type WorkspaceContextValue = {
   message: string;
   experience: string;
   experimentConnected: boolean;
+  experimentLoading: boolean;
   today: string | null;
   isSmart: boolean;
   setMessage: (message: string) => void;
@@ -56,6 +57,47 @@ type WorkspaceContextValue = {
 };
 
 const WorkspaceContext = createContext<WorkspaceContextValue | null>(null);
+
+const FLAGSMITH_TIMEOUT_MS = 5000;
+
+function withTimeout<T>(operation: PromiseLike<T>, label: string): Promise<T> {
+  let timeout: ReturnType<typeof setTimeout> | undefined;
+
+  return Promise.race([
+    Promise.resolve(operation),
+    new Promise<never>((_, reject) => {
+      timeout = setTimeout(
+        () =>
+          reject(
+            new Error(
+              `${label} timed out after ${FLAGSMITH_TIMEOUT_MS} milliseconds.`,
+            ),
+          ),
+        FLAGSMITH_TIMEOUT_MS,
+      );
+    }),
+  ]).finally(() => {
+    if (timeout !== undefined) clearTimeout(timeout);
+  });
+}
+
+function getDataErrorMessage(error: unknown, fallback: string) {
+  if (typeof error === "object" && error !== null) {
+    if (
+      "code" in error &&
+      typeof error.code === "string" &&
+      (error.code === "PGRST205" || error.code === "42P01")
+    ) {
+      return "The study database is not set up yet. Run the migration in supabase/migrations to enable plans and calendar sessions.";
+    }
+
+    if ("message" in error && typeof error.message === "string") {
+      return error.message;
+    }
+  }
+
+  return error instanceof Error ? error.message : fallback;
+}
 
 export function WorkspaceProvider({ children }: { children: ReactNode }) {
   const router = useRouter();
@@ -69,6 +111,7 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
   const [message, setMessage] = useState("");
   const [experience, setExperience] = useState("traditional_planner");
   const [experimentConnected, setExperimentConnected] = useState(false);
+  const [experimentLoading, setExperimentLoading] = useState(true);
   const [today, setToday] = useState<string | null>(null);
   const isSmart = experience === "smart_planner";
 
@@ -84,11 +127,19 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
       if (!session?.user) {
         setExperience("traditional_planner");
         setExperimentConnected(false);
+        setExperimentLoading(false);
         return;
       }
 
+      setExperience("traditional_planner");
+      setExperimentConnected(false);
+      setExperimentLoading(true);
+
       try {
-        await flagsmith.identify(session.user.id);
+        await withTimeout(
+          flagsmith.identify(session.user.id),
+          "Flagsmith assignment",
+        );
 
         if (cancelled || revision !== identityRevision) return;
 
@@ -105,6 +156,7 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
         ) {
           setExperience("traditional_planner");
           setExperimentConnected(false);
+          setExperimentLoading(false);
           console.log(
             "[Flagsmith] User is not enrolled in the experiment:",
             experiment,
@@ -114,6 +166,7 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
 
         setExperience(assignedExperience);
         setExperimentConnected(true);
+        setExperimentLoading(false);
         console.log(
           "[Flagsmith] Authenticated experiment participant:",
           session.user.id,
@@ -125,6 +178,7 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
 
         if (!cancelled && revision === identityRevision) {
           setExperimentConnected(false);
+          setExperimentLoading(false);
         }
       }
     }
@@ -134,15 +188,19 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
 
       if (!environmentID) {
         console.error("Flagsmith environment ID is missing.");
+        setExperimentLoading(false);
         return;
       }
 
       try {
-        await flagsmith.init({
-          environmentID,
-          cacheFlags: true,
-          enableEvents: true,
-        });
+        await withTimeout(
+          flagsmith.init({
+            environmentID,
+            cacheFlags: true,
+            enableEvents: true,
+          }),
+          "Flagsmith initialization",
+        );
 
         if (cancelled) return;
 
@@ -169,6 +227,7 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
 
         if (!cancelled) {
           setExperimentConnected(false);
+          setExperimentLoading(false);
         }
       }
     }
@@ -232,9 +291,7 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
 
         if (active && currentRevision === revision) {
           setMessage(
-            error instanceof Error
-              ? error.message
-              : "Could not load your study data.",
+            getDataErrorMessage(error, "Could not load your study data."),
           );
         }
       } finally {
@@ -290,6 +347,11 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
   }, []);
 
   async function createPlan(input: PlanInput): Promise<boolean> {
+    if (experimentLoading) {
+      setMessage("Please wait while Flagsmith assigns your planner experience.");
+      return false;
+    }
+
     const subject = input.subject.trim();
     if (!subject || !input.deadline) {
       setMessage("Enter a subject and deadline first.");
@@ -419,7 +481,7 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
     } catch (error) {
       console.error("[Supabase] Could not save study plan:", error);
       setMessage(
-        error instanceof Error ? error.message : "Could not save your plan.",
+        getDataErrorMessage(error, "Could not save your plan."),
       );
       return false;
     } finally {
@@ -526,9 +588,7 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
     } catch (error) {
       console.error("[Supabase] Could not create study session:", error);
       setMessage(
-        error instanceof Error
-          ? error.message
-          : "Could not add this study session.",
+        getDataErrorMessage(error, "Could not add this study session."),
       );
       return false;
     } finally {
@@ -576,6 +636,7 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
     message,
     experience,
     experimentConnected,
+    experimentLoading,
     today,
     isSmart,
     setMessage,

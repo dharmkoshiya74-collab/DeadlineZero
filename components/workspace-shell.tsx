@@ -1,22 +1,18 @@
-"use client";
+﻿"use client";
 
-import {
-  useEffect,
-  useState,
-  type ReactNode,
-} from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { MaterialIcon } from "@/components/material-icon";
 import { useWorkspace } from "@/lib/workspace-context";
 
 const navigation = [
-  { href: "/", label: "Command Center", icon: "grid_view" },
-  { href: "/study-planner", label: "Study planner", icon: "menu_book" },
-  { href: "/timeline", label: "Timeline", icon: "calendar_month" },
-  { href: "/performance", label: "Performance", icon: "insights" },
-  { href: "/assistant", label: "AI Companion", icon: "smart_toy" },
-  { href: "/settings", label: "Settings", icon: "settings" },
+  { href: "/", label: "Command Center", icon: "grid_view", group: "WORKSPACE" },
+  { href: "/study-planner", label: "Study Planner", icon: "menu_book", group: "WORKSPACE" },
+  { href: "/timeline", label: "Timeline", icon: "calendar_month", group: "WORKSPACE" },
+  { href: "/performance", label: "Performance", icon: "insights", group: "INSIGHTS" },
+  { href: "/assistant", label: "AI Companion", icon: "smart_toy", group: "INSIGHTS" },
+  { href: "/settings", label: "Settings", icon: "settings", group: "PREFERENCES" },
 ];
 
 const routeTitles: Record<string, string> = {
@@ -28,9 +24,7 @@ const routeTitles: Record<string, string> = {
   "/settings": "Settings",
 };
 
-type WorkspaceShellProps = {
-  children: ReactNode;
-};
+type WorkspaceShellProps = { children: ReactNode };
 
 export function WorkspaceShell({ children }: WorkspaceShellProps) {
   const pathname = usePathname();
@@ -43,18 +37,21 @@ export function WorkspaceShell({ children }: WorkspaceShellProps) {
     setMessage,
     signOut,
   } = useWorkspace();
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [railCollapsed, setRailCollapsed] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
   const [experimentDetailsOpen, setExperimentDetailsOpen] = useState(false);
   const [focusSeconds, setFocusSeconds] = useState(25 * 60);
   const [focusRunning, setFocusRunning] = useState(false);
+
   const title = routeTitles[pathname] ?? "DeadlineZero";
   const activeVariation = experimentConnected ? experience : null;
+  const timeLabel = `${String(Math.floor(focusSeconds / 60)).padStart(2, "0")}:${String(focusSeconds % 60).padStart(2, "0")}`;
+  const initials = email ? email.charAt(0).toUpperCase() : "D";
 
   useEffect(() => {
     if (!focusRunning) return;
-
     const interval = window.setInterval(() => {
       setFocusSeconds((current) => {
         if (current <= 1) {
@@ -65,7 +62,6 @@ export function WorkspaceShell({ children }: WorkspaceShellProps) {
         return current - 1;
       });
     }, 1000);
-
     return () => window.clearInterval(interval);
   }, [focusRunning]);
 
@@ -77,7 +73,6 @@ export function WorkspaceShell({ children }: WorkspaceShellProps) {
         setExperimentDetailsOpen(false);
       }
     }
-
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
   }, []);
@@ -87,189 +82,210 @@ export function WorkspaceShell({ children }: WorkspaceShellProps) {
     setFocusRunning((running) => !running);
   }
 
-  const timeLabel = `${String(Math.floor(focusSeconds / 60)).padStart(2, "0")}:${String(focusSeconds % 60).padStart(2, "0")}`;
+  const groupedNavigation = [
+    { label: "WORKSPACE", items: navigation.filter((item) => item.group === "WORKSPACE") },
+    { label: "INSIGHTS", items: navigation.filter((item) => item.group === "INSIGHTS") },
+    { label: "PREFERENCES", items: navigation.filter((item) => item.group === "PREFERENCES") },
+  ];
 
   return (
-    <div className={`workspace-root${railCollapsed ? " is-rail-collapsed" : ""}`}>
+    <div className={`dz-shell${railCollapsed ? " dz-shell--collapsed" : ""}`}>
       {mobileMenuOpen && (
         <button
           aria-label="Close navigation"
-          className="workspace-scrim"
+          className="dz-scrim"
           onClick={() => setMobileMenuOpen(false)}
+          type="button"
         />
       )}
 
-      <aside className={`workspace-rail${mobileMenuOpen ? " is-open" : ""}`}>
-        <div>
-          <div className="brand-lockup">
-            <Link aria-label="DeadlineZero Command Center" href="/" className="brand-mark">
-              <MaterialIcon name="timelapse" size={20} />
+      <aside className={`dz-sidebar${mobileMenuOpen ? " dz-sidebar--open" : ""}`}>
+        <div className="dz-sidebar-top">
+          <div className="dz-brand-row">
+            <Link href="/" aria-label="DeadlineZero home" className="dz-brand-mark">
+              <MaterialIcon name="timelapse" size={21} />
             </Link>
-            <Link href="/" className="brand-wordmark">
-              <span>Deadline<span className="brand-accent">Zero</span></span>
-              <small>STUDENT PLANNER</small>
+            <Link href="/" className="dz-brand-copy">
+              <span className="dz-brand-name">Deadline<span>Zero</span></span>
+              <span className="dz-brand-caption">ACADEMIC MISSION CONTROL</span>
             </Link>
             <button
+              className="dz-icon-button dz-mobile-close"
               aria-label="Close navigation"
-              className="icon-button rail-close"
               onClick={() => setMobileMenuOpen(false)}
-            >
-              <MaterialIcon name="close" size={17} />
-            </button>
-            <button
-              aria-label={railCollapsed ? "Expand navigation pane" : "Collapse navigation pane"}
-              className="icon-button rail-collapse-button"
-              onClick={() => setRailCollapsed((collapsed) => !collapsed)}
-              title={railCollapsed ? "Expand navigation pane" : "Collapse navigation pane"}
               type="button"
             >
-              <MaterialIcon name={railCollapsed ? "dock_to_right" : "dock_to_left"} size={16} />
+              <MaterialIcon name="close" size={18} />
+            </button>
+            <button
+              className="dz-icon-button dz-collapse-button"
+              aria-label={railCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+              title={railCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+              onClick={() => setRailCollapsed((value) => !value)}
+              type="button"
+            >
+              <MaterialIcon name={railCollapsed ? "dock_to_right" : "dock_to_left"} size={17} />
             </button>
           </div>
 
-          <div className="rail-rule" />
-          <nav aria-label="Workspace navigation" className="rail-nav">
-            {navigation.map((item) => {
-              const selected =
-                item.href === "/"
-                  ? pathname === "/"
-                  : pathname.startsWith(item.href);
+          <div className="dz-workspace-chip">
+            <span className="dz-workspace-chip-icon"><MaterialIcon name="school" size={15} /></span>
+            <span className="dz-workspace-chip-copy">
+              <strong>Personal workspace</strong>
+              <small>STUDENT EDITION</small>
+            </span>
+            <MaterialIcon name="unfold_more" size={16} />
+          </div>
 
-              return (
-                <Link
-                  aria-label={item.label}
-                  aria-current={selected ? "page" : undefined}
-                  className={`rail-link${selected ? " is-active" : ""}`}
-                  href={item.href}
-                  key={item.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  <span className="rail-link-main">
-                    <MaterialIcon name={item.icon} size={18} />
-                    <span>{item.label}</span>
-                  </span>
-                </Link>
-              );
-            })}
+          <nav className="dz-navigation" aria-label="Main navigation">
+            {groupedNavigation.map((group) => (
+              <div className="dz-nav-group" key={group.label}>
+                <div className="dz-nav-heading">{group.label}</div>
+                {group.items.map((item) => {
+                  const selected = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
+                  return (
+                    <Link
+                      href={item.href}
+                      key={item.href}
+                      aria-current={selected ? "page" : undefined}
+                      aria-label={item.label}
+                      title={railCollapsed ? item.label : undefined}
+                      className={`dz-nav-link${selected ? " dz-nav-link--active" : ""}`}
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      <span className="dz-nav-icon"><MaterialIcon name={item.icon} size={19} /></span>
+                      <span className="dz-nav-label">{item.label}</span>
+                      {selected && <span className="dz-nav-active-mark" />}
+                    </Link>
+                  );
+                })}
+              </div>
+            ))}
           </nav>
         </div>
 
-        <div className="rail-footer">
-          <div className="rail-rule" />
-          <div className="connection-row">
-            <span className={`status-dot${userId ? " online" : ""}`} />
-            <span>{userId ? "Synced account" : "Not signed in"}</span>
+        <div className="dz-sidebar-bottom">
+          <div className="dz-sync-status">
+            <span className={`dz-sync-dot${userId ? " dz-sync-dot--online" : ""}`} />
+            <span>{userId ? "Cloud sync active" : "Local workspace"}</span>
+            <span className="dz-sync-indicator">{userId ? "LIVE" : "LOCAL"}</span>
           </div>
-          <div className="rail-account">
-            <div className="account-avatar" aria-hidden="true">
-              {email ? email.charAt(0).toUpperCase() : <MaterialIcon name="school" size={17} />}
-            </div>
-            <div className="account-copy">
-              <span>{email || "Student account"}</span>
-              <small>{userId ? "Personal workspace" : "Sign in to sync data"}</small>
+          <div className="dz-account-card">
+            <div className="dz-avatar">{email ? initials : <MaterialIcon name="school" size={18} />}</div>
+            <div className="dz-account-details">
+              <strong>{email || "Student account"}</strong>
+              <span>{userId ? "Personal account" : "Sign in to sync data"}</span>
             </div>
             {userId && (
               <button
+                className="dz-icon-button dz-signout-button"
                 aria-label="Sign out"
-                className="icon-button"
-                onClick={() => void signOut()}
                 title="Sign out"
+                onClick={() => void signOut()}
+                type="button"
               >
-                <MaterialIcon name="logout" size={16} />
+                <MaterialIcon name="logout" size={17} />
               </button>
             )}
           </div>
         </div>
       </aside>
 
-      <div className="workspace-main">
-        <header className="command-bar">
-          <div className="command-bar-left">
+      <section className="dz-main">
+        <header className="dz-topbar">
+          <div className="dz-topbar-leading">
             <button
+              className="dz-icon-button dz-mobile-menu"
               aria-label="Open navigation"
-              className="icon-button mobile-menu-button"
               onClick={() => setMobileMenuOpen(true)}
               type="button"
             >
-              <MaterialIcon name="menu" size={19} />
+              <MaterialIcon name="menu" size={20} />
             </button>
-            <div className="command-page-identity">
-              <span className="command-context">WORKSPACE</span>
-              <span className="command-context-divider" aria-hidden="true">/</span>
-              <strong className="command-page-title">{title}</strong>
+            <div className="dz-page-heading">
+              <span className="dz-page-overline">DEADLINEZERO <span>/</span> WORKSPACE</span>
+              <h1>{title}</h1>
             </div>
           </div>
 
-          <div className="command-bar-actions">
+          <div className="dz-topbar-actions">
             {activeVariation && (
-              <div className="experiment-menu-wrap">
+              <div className="dz-popover-anchor">
                 <button
+                  className={`dz-experiment-pill${experimentDetailsOpen ? " dz-experiment-pill--open" : ""}`}
                   aria-expanded={experimentDetailsOpen}
                   aria-label={`Experiment active. Assigned ${activeVariation.replaceAll("_", " ")}. Show details`}
-                  className="experiment-status-trigger"
                   onClick={() => {
                     setExperimentDetailsOpen((open) => !open);
                     setProfileOpen(false);
                   }}
                   type="button"
                 >
-                  <span className="status-dot violet" />
-                  <span className="experiment-status-label">Experiment</span>
+                  <span className="dz-experiment-pulse" />
+                  <span className="dz-experiment-label">EXPERIMENT</span>
                   <strong>{activeVariation === "smart_planner" ? "Smart" : activeVariation === "traditional_planner" ? "Traditional" : activeVariation.replaceAll("_", " ")}</strong>
                   <MaterialIcon name="expand_more" size={16} />
                 </button>
                 {experimentDetailsOpen && (
-                  <div className="experiment-details-popover">
-                    <span className="experiment-details-eyebrow">FLAGSMITH EXPERIMENT</span>
+                  <div className="dz-popover dz-experiment-popover">
+                    <span className="dz-popover-kicker">LIVE EXPERIMENT</span>
                     <strong>Study planner experience</strong>
-                    <span className="experiment-details-variant">
-                      <span className="status-dot violet" />
-                      Assigned variant: {activeVariation.replaceAll("_", " ")}
-                    </span>
+                    <div className="dz-assignment-row">
+                      <span className="dz-experiment-pulse" />
+                      <span>Assigned variant</span>
+                      <b>{activeVariation.replaceAll("_", " ")}</b>
+                    </div>
                     <code>study_planner_experience_v2</code>
-                    <span className="experiment-details-note">Your assigned experience is active for this account.</span>
+                    <p>Your assigned experience is active for this account.</p>
                   </div>
                 )}
               </div>
             )}
-            <button
-              aria-label={focusRunning ? `Pause focus timer, ${timeLabel} remaining` : "Start 25 minute focus timer"}
-              className={`focus-trigger${focusRunning ? " is-running" : ""}`}
-              onClick={toggleFocus}
-              type="button"
-            >
-              <MaterialIcon name={focusRunning ? "pause" : "play_arrow"} size={16} />
-              <span>{focusRunning ? timeLabel : focusSeconds === 0 ? "Restart Focus" : "Focus 25m"}</span>
-            </button>
-            <div className="profile-menu-wrap">
+
+            <div className="dz-focus-wrap">
               <button
+                className={`dz-focus-button${focusRunning ? " dz-focus-button--running" : ""}`}
+                aria-label={focusRunning ? `Pause focus timer, ${timeLabel} remaining` : "Start 25 minute focus timer"}
+                onClick={toggleFocus}
+                type="button"
+              >
+                <span className="dz-focus-icon"><MaterialIcon name={focusRunning ? "pause" : "play_arrow"} size={17} /></span>
+                <span>{focusRunning ? timeLabel : focusSeconds === 0 ? "Restart focus" : "Focus session"}</span>
+                {!focusRunning && <kbd>25m</kbd>}
+              </button>
+            </div>
+
+            <div className="dz-popover-anchor">
+              <button
+                className="dz-profile-button"
                 aria-expanded={profileOpen}
                 aria-label="Open account menu"
-                className="profile-trigger profile-trigger-compact"
                 onClick={() => {
                   setProfileOpen((open) => !open);
                   setExperimentDetailsOpen(false);
                 }}
                 type="button"
               >
-                <span className="account-avatar small" aria-hidden="true">
-                  {email ? email.charAt(0).toUpperCase() : <MaterialIcon name="account_circle" size={17} />}
-                </span>
+                <span className="dz-avatar dz-avatar--top">{email ? initials : <MaterialIcon name="account_circle" size={18} />}</span>
                 <MaterialIcon name="expand_more" size={15} />
               </button>
               {profileOpen && (
-                <div className="profile-menu">
-                  <span className="profile-menu-email">{email || "Not signed in"}</span>
+                <div className="dz-popover dz-profile-popover">
+                  <div className="dz-profile-summary">
+                    <span className="dz-avatar">{email ? initials : <MaterialIcon name="account_circle" size={18} />}</span>
+                    <span><strong>{email || "Guest account"}</strong><small>{userId ? "Synced workspace" : "Not signed in"}</small></span>
+                  </div>
+                  <div className="dz-popover-divider" />
                   <Link href="/settings" onClick={() => setProfileOpen(false)}>
-                    <MaterialIcon name="tune" size={16} /> Settings
+                    <MaterialIcon name="tune" size={17} /> Settings
                   </Link>
                   {userId ? (
                     <button onClick={() => void signOut()} type="button">
-                      <MaterialIcon name="logout" size={16} /> Sign out
+                      <MaterialIcon name="logout" size={17} /> Sign out
                     </button>
                   ) : (
                     <Link href="/login" onClick={() => setProfileOpen(false)}>
-                      <MaterialIcon name="login" size={16} /> Sign in
+                      <MaterialIcon name="login" size={17} /> Sign in
                     </Link>
                   )}
                 </div>
@@ -279,17 +295,17 @@ export function WorkspaceShell({ children }: WorkspaceShellProps) {
         </header>
 
         {message && (
-          <div className="workspace-notice" role="status">
-            <span>{message}</span>
-            <button aria-label="Dismiss message" onClick={() => setMessage("")}>
-              <MaterialIcon name="close" size={15} />
+          <div className="dz-notice" role="status">
+            <span><MaterialIcon name="info" size={17} />{message}</span>
+            <button aria-label="Dismiss message" onClick={() => setMessage("")} type="button">
+              <MaterialIcon name="close" size={16} />
             </button>
           </div>
         )}
 
-        <main className="workspace-content">{children}</main>
-      </div>
-
+        <main className="dz-content">{children}</main>
+      </section>
     </div>
   );
 }
+

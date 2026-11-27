@@ -12,6 +12,7 @@ export function SettingsPage() {
     authLoading,
     experience,
     experimentConnected,
+    experimentLoading,
     signOut,
   } = useWorkspace();
 
@@ -20,7 +21,7 @@ export function SettingsPage() {
       <PageHeading
         eyebrow="YOUR ACCOUNT"
         title="Settings"
-        description="Manage your account and see which planner experience is available."
+        description="Manage your account and review your Flagsmith planner assignment."
       />
 
       <div className="settings-grid">
@@ -51,28 +52,42 @@ export function SettingsPage() {
           )}
         </Panel>
 
-        <Panel className="settings-panel" eyebrow="PLANNER EXPERIENCE" title="Your planner setup">
+        <Panel className="settings-panel" eyebrow="FLAGSMITH EXPERIMENT" title="Your planner assignment">
           <div className="settings-identity">
             <span className="settings-identity-icon violet"><MaterialIcon name="flag" size={19} /></span>
             <div>
               <MonoLabel>CURRENT EXPERIENCE</MonoLabel>
-              <strong className="settings-code">{experimentConnected ? experience : "Unavailable"}</strong>
+              <strong className="settings-code">
+                {experimentLoading ? "Checking Flagsmith" : experimentConnected ? experience : "Unavailable"}
+              </strong>
             </div>
           </div>
           <div className="settings-detail-row">
             <span>Available planner style</span>
             <strong className={experimentConnected ? "variation-live" : "variation-unavailable"}>
-              {experimentConnected ? experience : "Not enrolled / unavailable"}
+              {experimentLoading
+                ? "Assignment in progress"
+                : experimentConnected
+                  ? experience
+                  : "Not enrolled / unavailable"}
             </strong>
           </div>
           <div className="settings-detail-row">
-            <span>Availability</span>
+            <span>Experiment participation</span>
             <span className={`status-pill ${experimentConnected ? "success" : ""}`}>
-              {experimentConnected ? "READY" : "UNAVAILABLE"}
+              {experimentLoading ? "ASSIGNING" : experimentConnected ? "ENROLLED" : "NOT ENROLLED"}
             </span>
           </div>
+          <div className="settings-detail-row">
+            <span>Feature flag</span>
+            <code>study_planner_experience_v2</code>
+          </div>
+          <div className="settings-detail-row">
+            <span>Success event</span>
+            <code>study_plan_created</code>
+          </div>
           <p className="settings-help">
-            The planner experience is assigned automatically and cannot be changed here.
+            Flagsmith assigns one planner version per enrolled participant. A successful plan save records the event for enrolled accounts. You can’t change your assigned version here.
           </p>
         </Panel>
 

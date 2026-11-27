@@ -1,10 +1,11 @@
 "use client";
 
 import { useMemo, useState, type ReactNode } from "react";
-import { EmptyState, MonoLabel, Panel } from "@/components/academic-ui";
+import Link from "next/link";
+import { EmptyState, MonoLabel, PageHeading, Panel } from "@/components/academic-ui";
 import { MaterialIcon } from "@/components/material-icon";
 import { useWorkspace } from "@/lib/workspace-context";
-import { calculateProgress, dateFromKey, getDateKey } from "@/lib/study-utils";
+import { calculateProgress, dateFromKey, formatDate, getDateKey } from "@/lib/study-utils";
 
 type Range = "7d" | "30d" | "all";
 
@@ -67,15 +68,31 @@ export function PerformanceIntelligence() {
     1,
     ...chartDays.map((day) => day.plannedMinutes / 60),
   );
+  const upcomingSessions = sessions.filter(
+    (session) =>
+      today &&
+      session.scheduled_date >= today &&
+      session.status === "pending",
+  );
+  const completedSessionCount = sessions.filter(
+    (session) => session.status === "completed",
+  ).length;
+  const plansByDeadline = [...tasks].sort((left, right) =>
+    left.deadline.localeCompare(right.deadline),
+  );
   const hasData = filteredSessions.length > 0;
 
   return (
     <div className="page-stack">
-      <h1 className="sr-only">Performance Intelligence</h1>
+      <PageHeading
+        eyebrow="YOUR PROGRESS"
+        title="See how you’re doing"
+        description="A clear picture of your study time, sessions, and consistency."
+      />
       <div className="analytics-toolbar">
         <div className="analytics-system-label">
           <span className="status-dot online" />
-          <MonoLabel>STUDY PERFORMANCE</MonoLabel>
+          <MonoLabel>YOUR STUDY ACTIVITY</MonoLabel>
           <span className="telemetry-divider">/</span>
           <span className="telemetry-detail">Calculated from your saved sessions</span>
         </div>
@@ -93,24 +110,67 @@ export function PerformanceIntelligence() {
         </div>
       </div>
 
+      {userId && !sessionsLoading && (
+        <Panel
+          className="progress-overview-panel"
+          eyebrow="SAVED TO YOUR ACCOUNT"
+          title="Your study plans"
+          action={<Link className="text-link" href="/study-planner">Add a plan <MaterialIcon name="arrow_forward" size={15} /></Link>}
+        >
+          <div className="progress-overview-grid">
+            <div className="progress-overview-stat">
+              <span className="student-stat-icon indigo"><MaterialIcon name="menu_book" size={18} /></span>
+              <div><MonoLabel>SAVED PLANS</MonoLabel><strong>{tasks.length}</strong></div>
+            </div>
+            <div className="progress-overview-stat">
+              <span className="student-stat-icon lavender"><MaterialIcon name="schedule" size={18} /></span>
+              <div><MonoLabel>UPCOMING SESSIONS</MonoLabel><strong>{upcomingSessions.length}</strong></div>
+            </div>
+            <div className="progress-overview-stat">
+              <span className="student-stat-icon mint"><MaterialIcon name="task_alt" size={18} /></span>
+              <div><MonoLabel>SESSIONS COMPLETED</MonoLabel><strong>{completedSessionCount}</strong></div>
+            </div>
+          </div>
+          {plansByDeadline.length ? (
+            <div className="progress-plan-list">
+              {plansByDeadline.map((plan) => (
+                <div className="progress-plan-row" key={plan.id}>
+                  <strong>{plan.subject}</strong>
+                  <span>{formatDate(plan.deadline, { weekday: "short", month: "short", day: "numeric" })}</span>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="panel-copy">Create a study plan to see your upcoming deadlines here.</p>
+          )}
+        </Panel>
+      )}
+
       {!userId ? (
         <Panel><EmptyState title="Sign in to view performance" description="Your study analytics are calculated from sessions saved to your account." /></Panel>
       ) : sessionsLoading ? (
         <Panel><EmptyState title="Loading analytics" description="Your study-session records are being retrieved." /></Panel>
       ) : !hasData ? (
-        <Panel><EmptyState title="Not enough study data yet" description="Complete or schedule a study session to begin building your performance history." /></Panel>
+        <Panel>
+          <EmptyState
+            title={tasks.length ? "Your plans are ready" : "Not enough study data yet"}
+            description={tasks.length
+              ? "Your saved plans appear above. Study time and consistency will update as you complete study sessions."
+              : "Complete or schedule a study session to begin building your performance history."}
+          />
+        </Panel>
       ) : (
         <>
           <div className="analytics-kpis">
             <MetricCard
-              eyebrow="METRIC 01 / STUDY TIME"
+              eyebrow="STUDY TIME"
               icon={<MaterialIcon name="timelapse" size={20} />}
               value={`${(progress.completedMinutes / 60).toFixed(1)}`}
               suffix="HRS"
               detail={`${(progress.totalScheduledMinutes / 60).toFixed(1)} hours scheduled in this range`}
             />
             <MetricCard
-              eyebrow="METRIC 02 / EXECUTION"
+              eyebrow="SESSIONS COMPLETED"
               icon={<MaterialIcon name="verified" size={20} />}
               value={progress.completionRate === null ? "—" : `${progress.completionRate}`}
               suffix={progress.completionRate === null ? "" : "%"}
@@ -118,14 +178,14 @@ export function PerformanceIntelligence() {
               tone="violet"
             />
             <MetricCard
-              eyebrow="METRIC 03 / CONSISTENCY"
+              eyebrow="CONSISTENCY"
               icon={<MaterialIcon name="monitoring" size={20} />}
               value={consistency === null ? `${activeDays}` : `${consistency}`}
               suffix={consistency === null ? "DAYS" : "%"}
               detail={consistency === null ? `${activeDays} active days with completed sessions` : `${activeDays} of ${dayWindow} days had a completed session`}
             />
             <MetricCard
-              eyebrow="METRIC 04 / STREAK"
+              eyebrow="STUDY STREAK"
               icon={<MaterialIcon name="local_fire_department" size={20} filled />}
               value={`${progress.currentStreak}`}
               suffix="DAYS"
@@ -234,7 +294,7 @@ export function PerformanceIntelligence() {
               <p className="panel-copy">A day counts when at least one session is marked completed. No prediction or self-reported focus score is included.</p>
             </Panel>
 
-            <Panel className="data-notes-panel" eyebrow="DATA NOTES" title="What this view measures">
+            <Panel className="data-notes-panel" eyebrow="YOUR PROGRESS" title="How these numbers work">
               <div className="data-note"><span className="status-dot online" /><p>Study time totals completed session durations.</p></div>
               <div className="data-note"><span className="status-dot violet" /><p>Completion rate is completed sessions divided by all sessions in the selected range.</p></div>
               <div className="data-note"><span className="status-dot amber" /><p>Consistency and streak use completed-session dates only.</p></div>

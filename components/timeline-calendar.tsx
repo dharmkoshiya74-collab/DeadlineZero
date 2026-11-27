@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 import Link from "next/link";
-import { EmptyState, MonoLabel, Panel } from "@/components/academic-ui";
+import { EmptyState, MonoLabel, PageHeading, Panel } from "@/components/academic-ui";
 import { MaterialIcon } from "@/components/material-icon";
 import { useWorkspace } from "@/lib/workspace-context";
 import {
@@ -20,10 +20,10 @@ const viewOptions: {
   label: string;
   icon: string;
 }[] = [
-  { id: "week", label: "Weekly Schedule", icon: "view_week" },
-  { id: "month", label: "Monthly Timeline", icon: "calendar_month" },
-  { id: "agenda", label: "List Agenda", icon: "format_list_bulleted" },
-  { id: "gantt", label: "Gantt View", icon: "waterfall_chart" },
+  { id: "week", label: "Week", icon: "view_week" },
+  { id: "month", label: "Month", icon: "calendar_month" },
+  { id: "agenda", label: "Agenda", icon: "format_list_bulleted" },
+  { id: "gantt", label: "Plan timeline", icon: "timeline" },
 ];
 
 function getMonthDates(anchor: Date | null, offset: number) {
@@ -44,11 +44,24 @@ function getMonthDates(anchor: Date | null, offset: number) {
 }
 
 export function TimelineCalendar() {
-  const { tasks, sessions, userId, sessionsLoading, today, updateSessionStatus } = useWorkspace();
+  const {
+    tasks,
+    sessions,
+    userId,
+    sessionsLoading,
+    saving,
+    today,
+    createSession,
+    updateSessionStatus,
+  } = useWorkspace();
   const [weekOffset, setWeekOffset] = useState(0);
   const [monthOffset, setMonthOffset] = useState(0);
   const [selectedSubject, setSelectedSubject] = useState("all");
   const [mode, setMode] = useState<TimelineMode>("week");
+  const [addingSession, setAddingSession] = useState(false);
+  const [newSessionPlanId, setNewSessionPlanId] = useState("");
+  const [newSessionDate, setNewSessionDate] = useState("");
+  const [newSessionDuration, setNewSessionDuration] = useState("45");
   const weekAnchor = today ? dateFromKey(today) : null;
   if (weekAnchor) weekAnchor.setDate(weekAnchor.getDate() + weekOffset * 7);
   const weekDates = weekAnchor ? getWeekDates(weekAnchor) : [];
@@ -74,6 +87,9 @@ export function TimelineCalendar() {
       visibleKeys.has(task.deadline) &&
       (selectedSubject === "all" || task.subject === selectedSubject),
   );
+  const allPlansByDeadline = tasks
+    .filter((task) => selectedSubject === "all" || task.subject === selectedSubject)
+    .sort((left, right) => left.deadline.localeCompare(right.deadline));
   const totalMinutes = visibleSessions.reduce((sum, session) => sum + session.duration_minutes, 0);
   const completedMinutes = visibleSessions
     .filter((session) => session.status === "completed")
@@ -108,9 +124,27 @@ export function TimelineCalendar() {
     ),
   );
 
+  async function submitSession(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const saved = await createSession({
+      planId: newSessionPlanId || allPlansByDeadline[0]?.id || "",
+      scheduledDate: newSessionDate || today || "",
+      durationMinutes: Number(newSessionDuration),
+    });
+
+    if (saved) {
+      setAddingSession(false);
+      setNewSessionDate("");
+    }
+  }
+
   return (
     <div className="page-stack timeline-page">
-      <h1 className="sr-only">Timeline &amp; Calendar</h1>
+      <PageHeading
+        eyebrow="YOUR SCHEDULE"
+        title="Calendar"
+        description="See your saved study sessions and deadlines in one place."
+      />
       <div className="timeline-toolbar">
         <div className="timeline-toolbar-row">
           <div className="view-switch" aria-label="Timeline view" role="group">
@@ -370,14 +404,86 @@ export function TimelineCalendar() {
         </section>
       )}
 
-      <Panel className="timeline-deadline-footer" eyebrow="PLAN DEADLINES" title={mode === "month" ? "Deadlines this month" : "Deadlines in this week"}>
-        {visiblePlans.length ? (
+      <Panel
+        className="timeline-deadline-footer"
+        eyebrow="YOUR PLANS"
+        title="Study plan deadlines"
+        action={
+          <div className="timeline-plan-actions">
+            {userId && allPlansByDeadline.length > 0 && (
+              <button
+                aria-controls={addingSession ? "timeline-session-form" : undefined}
+                aria-expanded={addingSession}
+                className="button-secondary"
+                onClick={() => setAddingSession((open) => !open)}
+                type="button"
+              >
+                <MaterialIcon name={addingSession ? "close" : "add"} size={15} />
+                {addingSession ? "Cancel" : "Add a session"}
+              </button>
+            )}
+            <Link className="text-link" href="/study-planner">
+              Add a plan <MaterialIcon name="arrow_forward" size={15} />
+            </Link>
+          </div>
+        }
+      >
+        {addingSession && userId && allPlansByDeadline.length > 0 && (
+          <form
+            className="timeline-session-form"
+            id="timeline-session-form"
+            onSubmit={(event) => void submitSession(event)}
+          >
+            <div className="field-group">
+              <label htmlFor="calendar-session-plan">Study plan</label>
+              <select
+                id="calendar-session-plan"
+                onChange={(event) => setNewSessionPlanId(event.target.value)}
+                required
+                value={newSessionPlanId || allPlansByDeadline[0].id}
+              >
+                {allPlansByDeadline.map((plan) => (
+                  <option key={plan.id} value={plan.id}>{plan.subject}</option>
+                ))}
+              </select>
+            </div>
+            <div className="field-group">
+              <label htmlFor="calendar-session-date">Study date</label>
+              <input
+                id="calendar-session-date"
+                min={today ?? undefined}
+                onChange={(event) => setNewSessionDate(event.target.value)}
+                required
+                type="date"
+                value={newSessionDate || today || ""}
+              />
+            </div>
+            <div className="field-group">
+              <label htmlFor="calendar-session-duration">Duration in minutes</label>
+              <input
+                id="calendar-session-duration"
+                max="600"
+                min="15"
+                onChange={(event) => setNewSessionDuration(event.target.value)}
+                required
+                step="15"
+                type="number"
+                value={newSessionDuration}
+              />
+            </div>
+            <button className="button-primary" disabled={saving} type="submit">
+              <MaterialIcon name="event_available" size={16} />
+              {saving ? "Saving…" : "Save session"}
+            </button>
+          </form>
+        )}
+        {allPlansByDeadline.length ? (
           <div className="deadline-list">
-            {visiblePlans.map((plan) => (
+            {allPlansByDeadline.map((plan) => (
               <div className="deadline-row" key={plan.id}>
                 <span className="deadline-accent" />
                 <div className="deadline-copy">
-                  <span className="deadline-chip">{formatDate(plan.deadline, { weekday: "short", month: "short", day: "numeric" }).toUpperCase()}</span>
+                  <span className="deadline-chip">{formatDate(plan.deadline, { weekday: "short", month: "short", day: "numeric" })}</span>
                   <strong>{plan.subject}</strong>
                 </div>
                 <span className="deadline-date">{formatDate(plan.deadline, { month: "short", day: "numeric" })}</span>
@@ -385,7 +491,7 @@ export function TimelineCalendar() {
             ))}
           </div>
         ) : (
-          <EmptyState title="No plan deadlines in this range" description="Deadlines come from your saved study plans." />
+          <EmptyState title="No study plans yet" description="Create a plan and its deadline will appear here." />
         )}
       </Panel>
     </div>

@@ -25,7 +25,7 @@ DeadlineZero provides an academic planning workspace that helps students organiz
 - **Traditional Planner:** Provides a simpler manual planning experience.
 - **Study Calendar:** View scheduled study sessions.
 - **Progress Tracking:** Track completed sessions and study progress.
-- **AI Academic Assistant:** Get academic planning and study-related assistance.
+- **AI Academic Assistant:** Get answers to academic and study-skills questions, plus a suggested study plan you can review and explicitly add to your workspace.
 - **Authentication:** Student accounts and protected dashboard access.
 - **A/B Experimentation:** Compare Traditional Planner and Smart Planner using Flagsmith.
 
@@ -97,7 +97,15 @@ GROQ_API_KEY=
 
 Never commit `.env.local` or expose server-side API keys.
 
-### 4. Start the development server
+### 4. Initialize the Supabase database
+
+In the Supabase Dashboard, open **SQL Editor**, paste the contents of
+`supabase/migrations/20261115000000_create_study_planner_tables.sql`, and run
+it. This creates the study-plan and calendar-session tables, enables
+row-level security, and grants authenticated users access only to their own
+records.
+
+### 5. Start the development server
 
 ```bash
 npm run dev
@@ -105,7 +113,7 @@ npm run dev
 
 Open http://localhost:3000.
 
-### 5. Create a production build
+### 6. Create a production build
 
 ```bash
 npm run build
@@ -148,9 +156,9 @@ We will interpret results with sample size and statistical uncertainty in mind.
 
 ## Demo
 
-**Live application:** Add your deployed application URL here.
+**Live application:** https://deadline-zero-eta.vercel.app
 
-**Demo video:** Add your final demonstration video URL here.
+**Demo video:** Add the final demonstration video URL before submission.
 
 ## Team
 

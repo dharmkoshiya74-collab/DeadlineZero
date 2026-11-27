@@ -14,6 +14,7 @@ import { supabase } from "@/lib/supabase";
 import {
   calculateProgress,
   generateStudySchedule,
+  getTodayKey,
   type StudyPlan,
   type StudySession,
 } from "@/lib/study-utils";
@@ -25,6 +26,12 @@ type PlanInput = {
   difficulty: string;
   priority: string;
   availableMinutes: string;
+};
+
+type SessionInput = {
+  planId: string;
+  scheduledDate: string;
+  durationMinutes: number;
 };
 
 type WorkspaceContextValue = {
@@ -42,6 +49,7 @@ type WorkspaceContextValue = {
   isSmart: boolean;
   setMessage: (message: string) => void;
   createPlan: (input: PlanInput) => Promise<boolean>;
+  createSession: (input: SessionInput) => Promise<boolean>;
   updateSessionStatus: (session: StudySession) => Promise<void>;
   removePlan: (id: string) => Promise<void>;
   signOut: () => Promise<void>;
@@ -461,6 +469,73 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
     );
   }
 
+  async function createSession(input: SessionInput): Promise<boolean> {
+    const plan = tasks.find((task) => task.id === input.planId);
+    if (!plan) {
+      setMessage("Choose a saved study plan for this session.");
+      return false;
+    }
+
+    if (!userId) {
+      router.push("/login");
+      return false;
+    }
+
+    const duration = input.durationMinutes;
+    const sessionDate = input.scheduledDate;
+    const minimumDate = today ?? getTodayKey();
+
+    if (!sessionDate || sessionDate < minimumDate) {
+      setMessage("Choose today or a future date for this session.");
+      return false;
+    }
+
+    if (!Number.isInteger(duration) || duration < 15 || duration > 600) {
+      setMessage("Session duration must be between 15 and 600 minutes.");
+      return false;
+    }
+
+    setSaving(true);
+    setMessage("");
+
+    try {
+      const { data, error } = await supabase
+        .from("study_sessions")
+        .insert({
+          user_id: userId,
+          plan_id: plan.id,
+          title: `${plan.subject} - Study session`,
+          scheduled_date: sessionDate,
+          duration_minutes: duration,
+          status: "pending",
+        })
+        .select(
+          "id, user_id, plan_id, title, scheduled_date, duration_minutes, status",
+        )
+        .single();
+
+      if (error) throw error;
+
+      setSessions((current) =>
+        [...current, data as StudySession].sort((left, right) =>
+          left.scheduled_date.localeCompare(right.scheduled_date),
+        ),
+      );
+      setMessage("Study session added to your calendar.");
+      return true;
+    } catch (error) {
+      console.error("[Supabase] Could not create study session:", error);
+      setMessage(
+        error instanceof Error
+          ? error.message
+          : "Could not add this study session.",
+      );
+      return false;
+    } finally {
+      setSaving(false);
+    }
+  }
+
   async function removePlan(id: string) {
     const { error } = await supabase
       .from("study_plans")
@@ -505,6 +580,7 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
     isSmart,
     setMessage,
     createPlan,
+    createSession,
     updateSessionStatus,
     removePlan,
     signOut,

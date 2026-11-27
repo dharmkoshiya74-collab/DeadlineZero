@@ -13,21 +13,21 @@ import { MaterialIcon } from "@/components/material-icon";
 import { useWorkspace } from "@/lib/workspace-context";
 
 const navigation = [
-  { href: "/", label: "Command Center", icon: "grid_view", number: "01" },
-  { href: "/study-planner", label: "Study Planner", icon: "auto_awesome", badge: "A/B" },
-  { href: "/timeline", label: "Timeline & Calendar", icon: "calendar_today", number: "03" },
-  { href: "/performance", label: "Performance Intel", icon: "monitoring", number: "04" },
-  { href: "/assistant", label: "AI Assistant", icon: "psychology", badge: "v2" },
-  { href: "/settings", label: "Settings & System", icon: "tune" },
+  { href: "/", label: "Command Center", icon: "grid_view" },
+  { href: "/study-planner", label: "Study planner", icon: "menu_book" },
+  { href: "/timeline", label: "Timeline", icon: "calendar_month" },
+  { href: "/performance", label: "Performance", icon: "insights" },
+  { href: "/assistant", label: "AI Companion", icon: "smart_toy" },
+  { href: "/settings", label: "Settings", icon: "settings" },
 ];
 
 const routeTitles: Record<string, string> = {
   "/": "Command Center",
   "/study-planner": "Study Planner",
-  "/timeline": "Timeline & Calendar",
-  "/performance": "Performance Intelligence",
-  "/assistant": "AI Study Assistant",
-  "/settings": "Settings & System",
+  "/timeline": "Timeline",
+  "/performance": "Performance",
+  "/assistant": "AI Companion",
+  "/settings": "Settings",
 };
 
 type WorkspaceShellProps = {
@@ -147,8 +147,8 @@ export function WorkspaceShell({ children }: WorkspaceShellProps) {
               <MaterialIcon name="timelapse" size={20} />
             </Link>
             <Link href="/" className="brand-wordmark">
-              <span>DEADLINE//ZERO</span>
-              <small>ACADEMIC WORKSPACE</small>
+              <span>Deadline<span className="brand-accent">//</span>Zero</span>
+              <small>ACADEMIC OS</small>
             </Link>
             <button
               aria-label="Close navigation"
@@ -189,13 +189,6 @@ export function WorkspaceShell({ children }: WorkspaceShellProps) {
                     <MaterialIcon name={item.icon} size={18} />
                     <span>{item.label}</span>
                   </span>
-                  {item.badge ? (
-                    <span className={`rail-badge${item.badge === "AI" ? " lime" : ""}`}>
-                      {item.badge}
-                    </span>
-                  ) : item.number ? (
-                    <span className="rail-number">{item.number}</span>
-                  ) : null}
                 </Link>
               );
             })}
@@ -206,8 +199,7 @@ export function WorkspaceShell({ children }: WorkspaceShellProps) {
           <div className="rail-rule" />
           <div className="connection-row">
             <span className={`status-dot${userId ? " online" : ""}`} />
-            <span>SUPABASE SESSION</span>
-            <strong>{userId ? "ACTIVE" : "SIGNED OUT"}</strong>
+            <span>{userId ? "Synced account" : "Not signed in"}</span>
           </div>
           <div className="rail-account">
             <div className="account-avatar" aria-hidden="true">
@@ -248,7 +240,7 @@ export function WorkspaceShell({ children }: WorkspaceShellProps) {
             </div>
             <div className="term-chip">
               <MaterialIcon name="school" size={15} />
-              <span>STUDENT WORKSPACE</span>
+              <span>STUDY SPACE</span>
             </div>
           </div>
 

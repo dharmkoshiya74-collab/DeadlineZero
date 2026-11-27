@@ -2,8 +2,9 @@
 
 import { useEffect, useRef, useState, type FormEvent, type KeyboardEvent } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { EmptyState, MonoLabel, Panel } from "@/components/academic-ui";
+import { EmptyState, MonoLabel, PageHeading, Panel } from "@/components/academic-ui";
 import { MaterialIcon } from "@/components/material-icon";
 import { supabase } from "@/lib/supabase";
 import { useWorkspace } from "@/lib/workspace-context";
@@ -189,11 +190,29 @@ export function AIAssistant() {
 
   return (
     <div className="page-stack assistant-page">
-    <h1 className="sr-only">AI Study Assistant</h1>
+      <PageHeading
+        eyebrow="A STUDY COMPANION"
+        title="Talk through your next step"
+        description="Ask about your saved plans, sessions, or a study topic."
+      />
+      <section aria-label="Study companions" className="assistant-companion-banner">
+        <Image
+          alt="Byte the red panda, Newton the cat, and Ada the axolotl"
+          className="assistant-companion-art"
+          height={576}
+          src="/images/study-companions.png"
+          width={1024}
+        />
+        <div>
+          <MonoLabel>MEET YOUR STUDY COMPANIONS</MonoLabel>
+          <h2>Byte · Newton · Ada</h2>
+          <p>Friendly faces for the study plans and sessions you save here.</p>
+        </div>
+      </section>
       <div className="assistant-telemetry">
         <div>
           <span className="status-dot online" />
-          <MonoLabel>DEADLINEZERO ASSISTANT</MonoLabel>
+          <MonoLabel>YOUR STUDY ASSISTANT</MonoLabel>
           <span className="telemetry-divider">/</span>
           <span>Context from your saved workspace</span>
         </div>
@@ -204,7 +223,7 @@ export function AIAssistant() {
 
       <div className="assistant-layout">
         <aside className="assistant-context-column">
-          <Panel className="context-panel" eyebrow="SAVED WORKSPACE CONTEXT" title="Study context">
+          <Panel className="context-panel" eyebrow="YOUR SAVED PLANS" title="Study context">
             {tasks.length ? (
               <div className="context-plan-list">
                 {tasks.slice(0, 5).map((task) => (

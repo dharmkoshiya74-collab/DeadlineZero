@@ -14,7 +14,6 @@ export function StudyPlanner() {
     authLoading,
     saving,
     isSmart,
-    experience,
     experimentConnected,
     today,
     createPlan,
@@ -77,22 +76,13 @@ export function StudyPlanner() {
       <div className="planner-experiment-strip">
         <div className="experiment-strip-main">
           <span className={`status-dot${experimentConnected ? " online" : ""}`} />
-          <MonoLabel>FLAGSMITH EXPERIMENT</MonoLabel>
-          <span className="telemetry-divider">/</span>
-          <code>study_planner_experience_v2</code>
-          <span className="telemetry-divider">/</span>
-          <span>VARIATION:</span>
+          <span>Your planner style</span>
           <strong className={experimentConnected ? "variation-live" : "variation-unavailable"}>
-            {experimentConnected ? experience : "not enrolled"}
+            {experimentConnected ? (isSmart ? "Smart schedule" : "Manual plan") : "Not assigned"}
           </strong>
         </div>
-        <div aria-label="Assigned planner variation" className="planner-variant-tabs">
-          <span className={experimentConnected && isSmart ? "selected" : ""}>
-            Treatment (Smart)
-          </span>
-          <span className={experimentConnected && !isSmart ? "selected" : ""}>
-            Control (Manual)
-          </span>
+        <div className="planner-experiment-detail">
+          {experimentConnected ? "Personalized for your study style" : "Planner assignment unavailable"}
         </div>
       </div>
 
@@ -100,18 +90,18 @@ export function StudyPlanner() {
         <div className="planner-intro-icon"><MaterialIcon name="auto_awesome" size={21} /></div>
         <div>
           <div className="planner-intro-title">
-            <h1>{isSmart ? "Smart Study Plan Generator" : "Traditional Study Planner"}</h1>
-            <span className={`variant-label ${isSmart ? "smart" : ""}`}>{isSmart ? "SMART VARIATION" : "TRADITIONAL VARIATION"}</span>
+            <h1>{isSmart ? "Plan your study sessions" : "Create a study plan"}</h1>
+            <span className={`variant-label ${isSmart ? "smart" : ""}`}>{isSmart ? "SMART PLAN" : "MANUAL PLAN"}</span>
           </div>
           <p>
             {isSmart
-              ? "Your assigned variation divides available study time into up-to-60-minute sessions across the days before your deadline."
-              : "Your assigned variation saves a study plan without automatically creating scheduled sessions."}
+              ? "Tell us what you’re studying and when it’s due. We’ll shape a realistic schedule around your available time."
+              : "Save what you’re studying and when it’s due. You can organize the sessions yourself."}
           </p>
         </div>
         <div className="planner-state">
-          <MonoLabel>ASSIGNMENT</MonoLabel>
-          <strong>{experimentConnected ? (isSmart ? "ENROLLED · SMART" : "ENROLLED · TRADITIONAL") : "UNAVAILABLE"}</strong>
+          <MonoLabel>YOUR PLAN STYLE</MonoLabel>
+          <strong>{experimentConnected ? (isSmart ? "Smart schedule" : "Manual plan") : "Not assigned"}</strong>
         </div>
       </div>
 
@@ -263,7 +253,7 @@ export function StudyPlanner() {
             ) : (
               <div className="traditional-preview">
                 <div className="traditional-preview-icon"><MaterialIcon name="event_available" size={20} /></div>
-                <p>Traditional variation saves your task details only. No sessions are generated, matching the current planner behavior.</p>
+                <p>Your plan is saved without automatically creating sessions. Add study blocks to your calendar when you’re ready.</p>
               </div>
             )}
           </Panel>
@@ -303,7 +293,7 @@ export function StudyPlanner() {
 
       <div className="planner-footnote">
         <MaterialIcon name="bolt" size={15} />
-        <span>Experience assignment is read from Flagsmith; creating a plan records the existing <code>study_plan_created</code> conversion event when the account is enrolled.</span>
+        <span>Your plan style is assigned automatically. Creating a plan records the existing <code>study_plan_created</code> event when you’re enrolled.</span>
       </div>
     </div>
   );

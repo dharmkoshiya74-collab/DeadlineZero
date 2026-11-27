@@ -1,14 +1,12 @@
 "use client";
 
 import {
-  useCallback,
   useEffect,
-  useRef,
   useState,
   type ReactNode,
 } from "react";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { MaterialIcon } from "@/components/material-icon";
 import { useWorkspace } from "@/lib/workspace-context";
 
@@ -36,7 +34,6 @@ type WorkspaceShellProps = {
 
 export function WorkspaceShell({ children }: WorkspaceShellProps) {
   const pathname = usePathname();
-  const router = useRouter();
   const {
     email,
     userId,
@@ -48,24 +45,12 @@ export function WorkspaceShell({ children }: WorkspaceShellProps) {
   } = useWorkspace();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [railCollapsed, setRailCollapsed] = useState(false);
-  const [commandOpen, setCommandOpen] = useState(false);
-  const [commandQuery, setCommandQuery] = useState("");
   const [profileOpen, setProfileOpen] = useState(false);
+  const [experimentDetailsOpen, setExperimentDetailsOpen] = useState(false);
   const [focusSeconds, setFocusSeconds] = useState(25 * 60);
   const [focusRunning, setFocusRunning] = useState(false);
-  const commandInput = useRef<HTMLInputElement>(null);
-  const commandTrigger = useRef<HTMLButtonElement>(null);
-  const commandWasOpen = useRef(false);
   const title = routeTitles[pathname] ?? "DeadlineZero";
   const activeVariation = experimentConnected ? experience : null;
-  const normalizedCommandQuery = commandQuery.trim().toLowerCase();
-  const matchingNavigation = navigation.filter((item) =>
-    item.label.toLowerCase().includes(normalizedCommandQuery),
-  );
-  const focusCommandLabel = focusRunning ? "Pause focus timer" : "Start focus timer";
-  const showFocusCommand = focusCommandLabel
-    .toLowerCase()
-    .includes(normalizedCommandQuery);
 
   useEffect(() => {
     if (!focusRunning) return;
@@ -85,43 +70,17 @@ export function WorkspaceShell({ children }: WorkspaceShellProps) {
   }, [focusRunning]);
 
   useEffect(() => {
-    if (commandOpen) {
-      commandInput.current?.focus();
-      commandWasOpen.current = true;
-    } else if (commandWasOpen.current) {
-      commandTrigger.current?.focus();
-      commandWasOpen.current = false;
-    }
-  }, [commandOpen]);
-
-  const openCommands = useCallback(() => {
-    setCommandQuery("");
-    setCommandOpen(true);
-  }, []);
-
-  useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
-      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
-        event.preventDefault();
-        if (commandOpen) setCommandOpen(false);
-        else openCommands();
-      }
       if (event.key === "Escape") {
-        setCommandOpen(false);
         setMobileMenuOpen(false);
         setProfileOpen(false);
+        setExperimentDetailsOpen(false);
       }
     }
 
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [commandOpen, openCommands]);
-
-  function navigate(href: string) {
-    setCommandOpen(false);
-    setMobileMenuOpen(false);
-    router.push(href);
-  }
+  }, []);
 
   function toggleFocus() {
     if (focusSeconds === 0) setFocusSeconds(25 * 60);
@@ -147,8 +106,8 @@ export function WorkspaceShell({ children }: WorkspaceShellProps) {
               <MaterialIcon name="timelapse" size={20} />
             </Link>
             <Link href="/" className="brand-wordmark">
-              <span>Deadline<span className="brand-accent">//</span>Zero</span>
-              <small>ACADEMIC OS</small>
+              <span>Deadline<span className="brand-accent">Zero</span></span>
+              <small>STUDENT PLANNER</small>
             </Link>
             <button
               aria-label="Close navigation"
@@ -230,58 +189,73 @@ export function WorkspaceShell({ children }: WorkspaceShellProps) {
               aria-label="Open navigation"
               className="icon-button mobile-menu-button"
               onClick={() => setMobileMenuOpen(true)}
+              type="button"
             >
               <MaterialIcon name="menu" size={19} />
             </button>
-            <div className="breadcrumb">
-              <span>WORKSPACE</span>
-              <span aria-hidden="true">/</span>
-              <strong>{title}</strong>
-            </div>
-            <div className="term-chip">
-              <MaterialIcon name="school" size={15} />
-              <span>STUDY SPACE</span>
+            <div className="command-page-identity">
+              <span className="command-context">WORKSPACE</span>
+              <span className="command-context-divider" aria-hidden="true">/</span>
+              <strong className="command-page-title">{title}</strong>
             </div>
           </div>
 
           <div className="command-bar-actions">
             {activeVariation && (
-              <div className="variation-chip" title="Assigned Flagsmith experiment variation">
-                <span className="status-dot violet" />
-                <span className="variation-key">study_planner_experience_v2</span>
-                <strong>{activeVariation}</strong>
+              <div className="experiment-menu-wrap">
+                <button
+                  aria-expanded={experimentDetailsOpen}
+                  aria-label={`Experiment active. Assigned ${activeVariation.replaceAll("_", " ")}. Show details`}
+                  className="experiment-status-trigger"
+                  onClick={() => {
+                    setExperimentDetailsOpen((open) => !open);
+                    setProfileOpen(false);
+                  }}
+                  type="button"
+                >
+                  <span className="status-dot violet" />
+                  <span className="experiment-status-label">Experiment</span>
+                  <strong>{activeVariation === "smart_planner" ? "Smart" : activeVariation === "traditional_planner" ? "Traditional" : activeVariation.replaceAll("_", " ")}</strong>
+                  <MaterialIcon name="expand_more" size={16} />
+                </button>
+                {experimentDetailsOpen && (
+                  <div className="experiment-details-popover">
+                    <span className="experiment-details-eyebrow">FLAGSMITH EXPERIMENT</span>
+                    <strong>Study planner experience</strong>
+                    <span className="experiment-details-variant">
+                      <span className="status-dot violet" />
+                      Assigned variant: {activeVariation.replaceAll("_", " ")}
+                    </span>
+                    <code>study_planner_experience_v2</code>
+                    <span className="experiment-details-note">Your assigned experience is active for this account.</span>
+                  </div>
+                )}
               </div>
             )}
-            <button
-              aria-label="Open quick command menu"
-              className="command-trigger"
-              onClick={openCommands}
-              ref={commandTrigger}
-            >
-              <MaterialIcon name="search" size={16} />
-              <span>Quick Command</span>
-              <kbd>⌘ K</kbd>
-            </button>
             <button
               aria-label={focusRunning ? `Pause focus timer, ${timeLabel} remaining` : "Start 25 minute focus timer"}
               className={`focus-trigger${focusRunning ? " is-running" : ""}`}
               onClick={toggleFocus}
+              type="button"
             >
-              <MaterialIcon name="play_arrow" size={16} />
+              <MaterialIcon name={focusRunning ? "pause" : "play_arrow"} size={16} />
               <span>{focusRunning ? timeLabel : focusSeconds === 0 ? "Restart Focus" : "Focus 25m"}</span>
             </button>
             <div className="profile-menu-wrap">
               <button
                 aria-expanded={profileOpen}
                 aria-label="Open account menu"
-                className="profile-trigger"
-                onClick={() => setProfileOpen((open) => !open)}
+                className="profile-trigger profile-trigger-compact"
+                onClick={() => {
+                  setProfileOpen((open) => !open);
+                  setExperimentDetailsOpen(false);
+                }}
+                type="button"
               >
                 <span className="account-avatar small" aria-hidden="true">
-                  {email ? email.charAt(0).toUpperCase() : <MaterialIcon name="account_circle" size={16} />}
+                  {email ? email.charAt(0).toUpperCase() : <MaterialIcon name="account_circle" size={17} />}
                 </span>
-                <span className="profile-email">{email || "Account"}</span>
-                <MaterialIcon name="expand_more" size={16} />
+                <MaterialIcon name="expand_more" size={15} />
               </button>
               {profileOpen && (
                 <div className="profile-menu">
@@ -290,7 +264,7 @@ export function WorkspaceShell({ children }: WorkspaceShellProps) {
                     <MaterialIcon name="tune" size={16} /> Settings
                   </Link>
                   {userId ? (
-                    <button onClick={() => void signOut()}>
+                    <button onClick={() => void signOut()} type="button">
                       <MaterialIcon name="logout" size={16} /> Sign out
                     </button>
                   ) : (
@@ -316,76 +290,6 @@ export function WorkspaceShell({ children }: WorkspaceShellProps) {
         <main className="workspace-content">{children}</main>
       </div>
 
-      {commandOpen && (
-        <div
-          className="command-overlay"
-          onMouseDown={(event) => {
-            if (event.target === event.currentTarget) setCommandOpen(false);
-          }}
-        >
-          <section
-            aria-label="Quick commands"
-            aria-modal="true"
-            className="command-dialog"
-            onKeyDown={(event) => {
-              if (event.key !== "Tab") return;
-              const focusable = event.currentTarget.querySelectorAll<HTMLElement>(
-                'input:not([disabled]), button:not([disabled])',
-              );
-              const first = focusable[0];
-              const last = focusable[focusable.length - 1];
-              if (event.shiftKey && document.activeElement === first) {
-                event.preventDefault();
-                last?.focus();
-              } else if (!event.shiftKey && document.activeElement === last) {
-                event.preventDefault();
-                first?.focus();
-              }
-            }}
-            role="dialog"
-          >
-            <div className="command-search">
-              <MaterialIcon name="search" size={18} />
-              <input
-                aria-label="Search workspace commands"
-                onChange={(event) => setCommandQuery(event.target.value)}
-                placeholder="Search screens and actions..."
-                ref={commandInput}
-                value={commandQuery}
-              />
-              <button aria-label="Close commands" className="icon-button" onClick={() => setCommandOpen(false)}>
-                <MaterialIcon name="close" size={16} />
-              </button>
-            </div>
-            <p className="eyebrow">NAVIGATE</p>
-            <div className="command-items">
-              {matchingNavigation.map((item) => {
-                return (
-                  <button
-                    key={item.href}
-                    onClick={() => navigate(item.href)}
-                  >
-                    <MaterialIcon name={item.icon} size={16} />
-                    <span>{item.label}</span>
-                    <span className="command-enter">↵</span>
-                  </button>
-                );
-              })}
-              {showFocusCommand && (
-                <button onClick={() => { toggleFocus(); setCommandOpen(false); }}>
-                  <MaterialIcon name="play_arrow" size={16} />
-                  <span>{focusCommandLabel}</span>
-                  <span className="command-enter">↵</span>
-                </button>
-              )}
-              {matchingNavigation.length === 0 && !showFocusCommand && (
-                <p className="command-empty">No matching commands.</p>
-              )}
-            </div>
-            <p className="command-hint">Press <kbd>ESC</kbd> to close</p>
-          </section>
-        </div>
-      )}
     </div>
   );
 }
